@@ -9,6 +9,14 @@
  *
  */
 
+#include <stddef.h>
+#include <stdlib.h>
+
+//Definition du type bool
+typedef int bool;
+#define true 1
+#define false 0
+
  /**
  * \struct Grid
  * \brief Objet grille pour le jeu.
@@ -32,9 +40,8 @@ typedef struct{
  */
 Grid createGrid(int size);
 
-
 /**
- * \fn void releaseGrid(Grid grd)
+ * \fn releaseGrid(Grid grd)
  * \brief Fonction de destruction d'une grille.
  *
  * \param grd la grille à detruire.

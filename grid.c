@@ -15,22 +15,24 @@
 
 Grid createGrid(int size){
 	//TODO: Instanciation dynamique de la grille
-
-	//pas sûr que c'est correct!! 
-
+	//
+	//je sais pas si ca marche vraiment mais ca compile :)
+	//
 	int i;
-	Grid grid_final = NULL;
-	grid_final = (Grid) malloc(size*sizeof(char *));
+	Grid grid_final;
+	grid_final.size = size;
+	grid_final.block = NULL;
+	grid_final.block = /*(char **)*/ malloc(size*sizeof(char *));
 	for (i=0 ; i<size ; i++)
 	{
-		grid_final[i] = (char *) malloc (size*sizeof(char));
+		grid_final.block[i] = /*(char *)*/ malloc (size*sizeof(char));
 	}
 	return grid_final;
 }
 
 void releaseGrid(Grid grd){
 	//TODO: Destruction de la grille -> free()
-	return NULL;
+	return;
 }
 // Fonciton random qui rends des valeurs entre [a,b[
 int rand_a_b(int a, int b){
@@ -42,37 +44,37 @@ Grid initGridRandom(int size){
 	//TODO: Affectation de toutes les valeurs de la grille avec des couleurs au hasard -> rand() % 6 DONE
 	int i,j,r;
 	
-	grid_final = createGrid(size);
+	Grid grid_final = createGrid(size);
 	
 	for (i = 0; i<size ; i++)
 	{
-		for (j = 0 ; j<size ; j++0)
+		for (j = 0 ; j<size ; j++)
 		{
 			r = (rand() % 6)+1 ;
 			switch (r)
 			{
 				case 1:
-				grid_final[i][j]='R';
+				grid_final.block[i][j]='R';
 				break;
 
 				case 2:
-				grid_final[i][j]='V';
+				grid_final.block[i][j]='V';
 				break;
 
 				case 3:
-				grid_final[i][j]='B';
+				grid_final.block[i][j]='B';
 				break;
 
 				case 4:
-				grid_final[i][j]='J';
+				grid_final.block[i][j]='J';
 				break;
 
 				case 5:
-				grid_final[i][j]='O';
+				grid_final.block[i][j]='O';
 				break;
 
 				case 6:
-				grid_final[i][j]='M';
+				grid_final.block[i][j]='M';
 				break;
 
 			} 
@@ -91,10 +93,27 @@ Grid initGridFromFile(char* file){
 	return NULL;
 }
 
+bool isColor(char color){
+	if(color=='B' ||
+	   color=='V' ||
+	   color=='R' ||
+	   color=='J' ||
+	   color=='M' ||
+	   color=='G')
+		return true;
+	else 
+		return false;
+}
+
 bool changeCaseColor(Grid *grd,unsigned int x,unsigned int y,char color){
 	//TODO: Verifie que la couleur existe
 	//TODO: Changement de couleur
-	return false;
+	if(isColor(color)){
+		grd->block[x][y]=color;
+		return true;
+	} else {
+		return false;
+	}
 }
 
 char *** identifyComponent4(Grid grd){
@@ -102,15 +121,21 @@ char *** identifyComponent4(Grid grd){
 	return NULL;
 }
 
-void colorFlood(Grid *grd,unsigned int x,unsigned int y,char color){
+bool colorFlood(Grid *grd,unsigned int x,unsigned int y,char color){
 	// voir https://fr.wikipedia.org/wiki/Algorithme_de_remplissage_par_diffusion#Variante_4-connexe
 	//TODO: Coder !
-	return NULL;
+	return false;
 }
 //algo du pot de peinture/Composante 4 Connexe
 
 bool checkFullGrid(Grid grd){
 	//TODO: Test si toute la grille a la meme valeur
-	return false;
+	int i,j;
+	char value = grd.block[0][0];
+	int size = grd.size;
+	for(i=0;i<size;i++)
+		for(j=0;j<size;j++)
+			if(grd.block[i][j] != value)
+				return true;
+	return true;
 }
-	
