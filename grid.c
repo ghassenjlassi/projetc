@@ -15,18 +15,72 @@
 
 Grid createGrid(int size){
 	//TODO: Instanciation dynamique de la grille
-	return NULL;
+
+	//pas sûr que c'est correct!! 
+
+	int i;
+	Grid grid_final = NULL;
+	grid_final = (Grid) malloc(size*sizeof(char *));
+	for (i=0 ; i<size ; i++)
+	{
+		grid_final[i] = (char *) malloc (size*sizeof(char));
+	}
+	return grid_final;
 }
 
 void releaseGrid(Grid grd){
 	//TODO: Destruction de la grille -> free()
 	return NULL;
 }
+// Fonciton random qui rends des valeurs entre [a,b[
+int rand_a_b(int a, int b){
+    return rand()%(b-a) +a;
+}
 
 Grid initGridRandom(int size){
-	//TODO: Appel de createGrid(size)
-	//TODO: Affectation de toutes les valeru de la grille avec des couleurs au hasard -> rand() % 6
-	return NULL;
+	//TODO: Appel de createGrid(size)  DONE
+	//TODO: Affectation de toutes les valeurs de la grille avec des couleurs au hasard -> rand() % 6 DONE
+	int i,j,r;
+	
+	grid_final = createGrid(size);
+	
+	for (i = 0; i<size ; i++)
+	{
+		for (j = 0 ; j<size ; j++0)
+		{
+			r = (rand() % 6)+1 ;
+			switch (r)
+			{
+				case 1:
+				grid_final[i][j]='R';
+				break;
+
+				case 2:
+				grid_final[i][j]='V';
+				break;
+
+				case 3:
+				grid_final[i][j]='B';
+				break;
+
+				case 4:
+				grid_final[i][j]='J';
+				break;
+
+				case 5:
+				grid_final[i][j]='O';
+				break;
+
+				case 6:
+				grid_final[i][j]='M';
+				break;
+
+			} 
+
+		}
+	} 
+
+	return grid_final;
 }
 
 Grid initGridFromFile(char* file){
