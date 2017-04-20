@@ -10,7 +10,11 @@
  */
 
 #include "grid.h"
-
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
 // ---------- Declaration des fonctions --------------------
 
 Grid createGrid(int size){
@@ -88,7 +92,19 @@ Grid initGridFromFile(char* file){
 	//TODO: Definir size avec la taille du fichier
 	//TODO: Appel de createGrid(size)
 	//TODO: Affectation de toutes les cases avec les valeurs du fichier
-	return NULL;
+	//pas sur
+	
+	FILE* fichier = fopen(file, "r+");
+	int size =0;
+	char*  buf = malloc(size*sizeof(char));
+	fseek(f,0,SEEK_SET);
+	fread(buf,sizeof(char),size-1,fichier);
+	createGrid(size);
+
+	
+
+
+
 }
 
 bool changeCaseColor(Grid *grd,unsigned int x,unsigned int y,char color){
