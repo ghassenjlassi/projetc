@@ -11,6 +11,8 @@
 
 #include <stddef.h>
 #include <stdlib.h>
+#include <math.h>
+#include <time.h>
 
 //Definition du type bool
 typedef int bool;
@@ -22,7 +24,8 @@ typedef int bool;
  * \brief Objet grille pour le jeu.
  *
  * grid est une structure pour definir la grille du jeu colorflood.
- * elle est definie par des cases (block) et sa taille (size) correspondant au nombre de carre sur un cote.
+ * elle est definie par des cases (block) et la taille (size) de son coté.
+ * litteralement la grille est : char block[size][size]
  *
  */
 typedef struct{

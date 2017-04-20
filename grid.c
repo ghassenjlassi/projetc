@@ -48,6 +48,8 @@ Grid initGridRandom(int size){
 	//TODO: Affectation de toutes les valeurs de la grille avec des couleurs au hasard -> rand() % 6 DONE
 	int i,j,r;
 	
+	srand(time(NULL));
+
 	Grid grid_final = createGrid(size);
 	
 	for (i = 0; i<size ; i++)
@@ -97,11 +99,14 @@ Grid initGridFromFile(char* file){
 	//pas sur
 	
 	FILE* fichier = fopen(file, "r+");
-	int size =0;
-	char*  buf = malloc(size*sizeof(char));
-	fseek(f,0,SEEK_SET);
+//	int size =0;
+	int size = fseek(fichier,0,SEEK_END);
+	char* buf = malloc(size*sizeof(char));
+	fseek(fichier,0,SEEK_SET);
 	fread(buf,sizeof(char),size-1,fichier);
-	createGrid(size);
+	int sideSize=(int)sqrt((float)size);
+	createGrid(sideSize);
+	
 
 	
 
@@ -139,8 +144,22 @@ char *** identifyComponent4(Grid grd){
 
 bool colorFlood(Grid *grd,unsigned int x,unsigned int y,char color){
 	// voir https://fr.wikipedia.org/wiki/Algorithme_de_remplissage_par_diffusion#Variante_4-connexe
-	//TODO: Coder !
-	return false;
+	if (!isColor(color))
+		return false;
+
+	if(color == grd->block[x][y])
+		return true;
+	else {
+		grd->block[x][y]=color;
+		if(x!=0)
+			colorFlood(grd,x-1,y,color);
+		if(x!=grd->size)
+			colorFlood(grd,x+1,y,color);
+		if(y!=0)
+			colorFlood(grd,x,y-1,color);
+		if(y!=grd->size)
+			colorFlood(grd,x,y+1,color);
+	}
 }
 //algo du pot de peinture/Composante 4 Connexe
 
