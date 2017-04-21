@@ -36,7 +36,14 @@ Grid createGrid(int size){
 
 void releaseGrid(Grid grd){
 	//TODO: Destruction de la grille -> free()
-	return;
+	int i;
+	for (i=0 ; i < grid.size ; i++)
+	{
+		free(grd[i]);
+		grd[i] = NULL;
+	}
+	free(grd);
+	grid = NULL;
 }
 // Fonciton random qui rends des valeurs entre [a,b[
 int rand_a_b(int a, int b){
