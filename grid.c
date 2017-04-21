@@ -34,11 +34,27 @@ Grid createGrid(int size){
 	return grid_final;
 }
 
+<<<<<<< HEAD
 void releaseGrid(Grid grd){
 	//TODO: Destruction de la grille -> free()
 	return;
 }
 // Fonciton random qui rends des valeurs entre [a,b[
+=======
+void releaseGrid(Grid *grd){
+	//TODO: Destruction de la grille -> free()
+	int i;
+	for (i=0 ; i < grd->size ; i++)
+	{
+		free(grd->block[i]);
+		grd->block[i] = NULL;
+	}
+	free(grd->block);
+	grd = NULL;
+}
+
+/* Fonciton random qui rends des valeurs entre [a,b[*/
+>>>>>>> be64d16c74b13d78182ebc06be666077c95df4fb
 int rand_a_b(int a, int b){
     return rand()%(b-a) +a;
 }
