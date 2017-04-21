@@ -8,11 +8,21 @@
  * Tests Unitaires :)
  *
  */
-
+#include <stdlib.h>
+#include <stdio.h>
+#include <ncurses.h>
+#include <unistd.h>
+#include <string.h>
+#include <math.h>
 #include <CUnit/CUnit.h>
+#include <CUnit/Basic.h>
 #include "grid.c"
 
 void test_init_grid(){
+	int n =5;
+grid c = createGrid(n);
+    CU_ASSERT(set_size(s) == 0);
+    set_free(&s);
 
 }
 

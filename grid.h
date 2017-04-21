@@ -14,7 +14,7 @@
 #include <math.h>
 #include <time.h>
 
-//Definition du type bool
+/*Definition du type bool*/
 typedef int bool;
 #define true 1
 #define false 0

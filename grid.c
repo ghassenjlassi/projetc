@@ -15,13 +15,13 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
-// ---------- Declaration des fonctions --------------------
+/*---------- Declaration des fonctions --------------------*/
 
 Grid createGrid(int size){
-	//TODO: Instanciation dynamique de la grille
+	/*TODO: Instanciation dynamique de la grille
 	//
 	//je sais pas si ca marche vraiment mais ca compile :)
-	//
+	//*/
 	int i;
 	Grid grid_final;
 	grid_final.size = size;
@@ -35,17 +35,17 @@ Grid createGrid(int size){
 }
 
 void releaseGrid(Grid grd){
-	//TODO: Destruction de la grille -> free()
+	/*//TODO: Destruction de la grille -> free()*/
 	return;
 }
-// Fonciton random qui rends des valeurs entre [a,b[
+/* Fonciton random qui rends des valeurs entre [a,b[*/
 int rand_a_b(int a, int b){
     return rand()%(b-a) +a;
 }
 
 Grid initGridRandom(int size){
-	//TODO: Appel de createGrid(size)  DONE
-	//TODO: Affectation de toutes les valeurs de la grille avec des couleurs au hasard -> rand() % 6 DONE
+	/*//TODO: Appel de createGrid(size)  DONE
+	//TODO: Affectation de toutes les valeurs de la grille avec des couleurs au hasard -> rand() % 6 DONE*/
 	int i,j,r;
 	
 	srand(time(NULL));
@@ -76,7 +76,7 @@ Grid initGridRandom(int size){
 				break;
 
 				case 5:
-				grid_final.block[i][j]='O';
+				grid_final.block[i][j]='G';
 				break;
 
 				case 6:
@@ -92,14 +92,14 @@ Grid initGridRandom(int size){
 }
 
 Grid initGridFromFile(char* file){
-	//TODO: Ouverture et lecture de la taille du fichier
+	/*TODO: Ouverture et lecture de la taille du fichier
 	//TODO: Definir size avec la taille du fichier
 	//TODO: Appel de createGrid(size)
 	//TODO: Affectation de toutes les cases avec les valeurs du fichier
-	//pas sur
+	//pas sur*/
 	
 	FILE* fichier = fopen(file, "r+");
-//	int size =0;
+/*/	int size =0;*/
 	int size = fseek(fichier,0,SEEK_END);
 	char* buf = malloc(size*sizeof(char));
 	fseek(fichier,0,SEEK_SET);
@@ -127,8 +127,8 @@ bool isColor(char color){
 }
 
 bool changeCaseColor(Grid *grd,unsigned int x,unsigned int y,char color){
-	//TODO: Verifie que la couleur existe
-	//TODO: Changement de couleur
+	/*//TODO: Verifie que la couleur existe
+	//TODO: Changement de couleur */
 	if(isColor(color)){
 		grd->block[x][y]=color;
 		return true;
@@ -138,12 +138,12 @@ bool changeCaseColor(Grid *grd,unsigned int x,unsigned int y,char color){
 }
 
 char *** identifyComponent4(Grid grd){
-	//TODO: Identifier la composante...
+	/*//TODO: Identifier la composante...*/
 	return NULL;
 }
 
 bool colorFlood(Grid *grd,unsigned int x,unsigned int y,char color){
-	// voir https://fr.wikipedia.org/wiki/Algorithme_de_remplissage_par_diffusion#Variante_4-connexe
+	/* // voir https://fr.wikipedia.org/wiki/Algorithme_de_remplissage_par_diffusion#Variante_4-connexe */
 	if (!isColor(color))
 		return false;
 
@@ -161,10 +161,10 @@ bool colorFlood(Grid *grd,unsigned int x,unsigned int y,char color){
 			colorFlood(grd,x,y+1,color);
 	}
 }
-//algo du pot de peinture/Composante 4 Connexe
+/* //algo du pot de peinture/Composante 4 Connexe */
 
 bool checkFullGrid(Grid grd){
-	//TODO: Test si toute la grille a la meme valeur
+	/* //TODO: Test si toute la grille a la meme valeur */
 	int i,j;
 	char value = grd.block[0][0];
 	int size = grd.size;
