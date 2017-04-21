@@ -15,13 +15,13 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
-/*---------- Declaration des fonctions --------------------*/
+// ---------- Declaration des fonctions --------------------
 
 Grid createGrid(int size){
-	/*TODO: Instanciation dynamique de la grille
+	//TODO: Instanciation dynamique de la grille
 	//
 	//je sais pas si ca marche vraiment mais ca compile :)
-	//*/
+	//
 	int i;
 	Grid grid_final;
 	grid_final.size = size;
@@ -35,23 +35,23 @@ Grid createGrid(int size){
 }
 
 void releaseGrid(Grid grd){
-	/*//TODO: Destruction de la grille -> free()*/
+	//TODO: Destruction de la grille -> free()
 	return;
 }
-/* Fonciton random qui rends des valeurs entre [a,b[*/
+// Fonciton random qui rends des valeurs entre [a,b[
 int rand_a_b(int a, int b){
     return rand()%(b-a) +a;
 }
 
 Grid initGridRandom(int size){
-	/*//TODO: Appel de createGrid(size)  DONE
-	//TODO: Affectation de toutes les valeurs de la grille avec des couleurs au hasard -> rand() % 6 DONE*/
+	//TODO: Appel de createGrid(size)  DONE
+	//TODO: Affectation de toutes les valeurs de la grille avec des couleurs au hasard -> rand() % 6 DONE
 	int i,j,r;
-	
+
 	srand(time(NULL));
 
 	Grid grid_final = createGrid(size);
-	
+
 	for (i = 0; i<size ; i++)
 	{
 		for (j = 0 ; j<size ; j++)
@@ -76,76 +76,62 @@ Grid initGridRandom(int size){
 				break;
 
 				case 5:
-				grid_final.block[i][j]='G';
+				grid_final.block[i][j]='O';
 				break;
 
 				case 6:
 				grid_final.block[i][j]='M';
 				break;
 
-			} 
+			}
 
 		}
-	} 
+	}
 
 	return grid_final;
 }
 
 Grid initGridFromFile(char* file){
-	/*TODO: Ouverture et lecture de la taille du fichier
+	//TODO: Ouverture et lecture de la taille du fichier
 	//TODO: Definir size avec la taille du fichier
 	//TODO: Appel de createGrid(size)
 	//TODO: Affectation de toutes les cases avec les valeurs du fichier
-	//pas sur*/
-	
-	FILE* fichier = fopen(file, "r+");
-/*/	int size =0;*/
-	int size = fseek(fichier,0,SEEK_END);
-	char* buf = malloc(size*sizeof(char));
-	fseek(fichier,0,SEEK_SET);
-	fread(buf,sizeof(char),size-1,fichier);
+	//pas sur
+	FILE *fd = fopen(file,"r+");
+	fseek(fd,0,SEEK_SET);
+	char buf;
+	int size= 0;
+
+	while (fread(&buf,sizeof(char),1,fd)) size++;
+	fseek(fd,0,SEEK_SET);
+
 	int sideSize=(int)sqrt((float)size);
-	createGrid(sideSize);
-	
+	Grid grd=createGrid(sideSize);
+	int i,j;
 
-	
-
-
-
-}
-
-bool isColor(char color){
-	if(color=='B' ||
-	   color=='V' ||
-	   color=='R' ||
-	   color=='J' ||
-	   color=='M' ||
-	   color=='G')
-		return true;
-	else 
-		return false;
+	for(i=0;i<sideSize;i++){
+		for(j=0;j<sideSize;j++){
+			fread(&buf,sizeof(char),1,fd);
+			grd.block[i][j]=buf;
+		}
+	}
+	return grd;
 }
 
 bool changeCaseColor(Grid *grd,unsigned int x,unsigned int y,char color){
-	/*//TODO: Verifie que la couleur existe
-	//TODO: Changement de couleur */
-	if(isColor(color)){
+	//TODO: Verifie que la couleur existe
+	//TODO: Changement de couleur
 		grd->block[x][y]=color;
 		return true;
-	} else {
-		return false;
-	}
 }
 
 char *** identifyComponent4(Grid grd){
-	/*//TODO: Identifier la composante...*/
+	//TODO: Identifier la composante...
 	return NULL;
 }
 
 bool colorFlood(Grid *grd,unsigned int x,unsigned int y,char color){
-	/* // voir https://fr.wikipedia.org/wiki/Algorithme_de_remplissage_par_diffusion#Variante_4-connexe */
-	if (!isColor(color))
-		return false;
+	// voir https://fr.wikipedia.org/wiki/Algorithme_de_remplissage_par_diffusion#Variante_4-connexe
 
 	if(color == grd->block[x][y])
 		return true;
@@ -161,10 +147,10 @@ bool colorFlood(Grid *grd,unsigned int x,unsigned int y,char color){
 			colorFlood(grd,x,y+1,color);
 	}
 }
-/* //algo du pot de peinture/Composante 4 Connexe */
+//algo du pot de peinture/Composante 4 Connexe
 
 bool checkFullGrid(Grid grd){
-	/* //TODO: Test si toute la grille a la meme valeur */
+	//TODO: Test si toute la grille a la meme valeur
 	int i,j;
 	char value = grd.block[0][0];
 	int size = grd.size;
@@ -173,4 +159,20 @@ bool checkFullGrid(Grid grd){
 			if(grd.block[i][j] != value)
 				return true;
 	return true;
+}
+
+int main(){
+    Grid g = initGridFromFile("grilleTest.txt");
+    int i,j;
+    i =g.size;
+    j=g.size;
+    for(i=0;i<g.size;i++){
+		for(j=0;j<g.size;j++){
+            printf(" %c",g.block[i][j]);
+		}
+        printf("\n");
+    }
+
+    return 0;
+
 }
