@@ -1,0 +1,29 @@
+
+all: grid
+
+cunit:  UnitTests  grid.o
+	cc $(LDFLAGS)  grid.o UnitTests -o cunit
+
+
+
+ui: grid.o 
+				cc $(LDFLAGS) .grid.o -o flood
+
+
+grid: grid.o
+	gcc -o grid grid.o
+
+grid.o: grid.c
+	gcc -o grid.o -c grid.c -W -Wall -ansi -pedantic
+
+doc:
+	doxygen doxygen.config
+run: ui
+	./flood
+clean:
+				rm -f  *.o core
+valgrind: cunit
+	valgrind --leak-check=yes ./cunit
+mrproper: clean
+				rm -f flood
+				rm -f cunit
