@@ -15,9 +15,9 @@
 #include <time.h>
 
 /*Definition du type bool*/
-typedef int bool;
+/*typedef int bool;
 #define true 1
-#define false 0
+#define false 0*/
 
  /**
  * \struct Grid
