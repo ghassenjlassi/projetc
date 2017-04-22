@@ -12,9 +12,26 @@
 #include "grid.c"
 #include <stdio.h>
 
+
+/**
+ * \fn void showGrid(Grid* grd)
+ * \brief Affiche la grille en texte
+ * \param *grd la grille à afficher.
+ */
 void showGrid(Grid* grd);
+
+/**
+ * \fn void showMenu()
+ * \brief Affiche le menu du jeu
+ * Propose à l'utilisateur plusieurs choix d'actions à réaliser
+ */
 void showMenu();
 
+/**
+ * \fn int main()
+ * \brief Application ColorFlood
+ * \return 0 en cas de succes
+ */
 int main(){
 	printf("ColorFlood\n");
 	int choix,size,x,y;

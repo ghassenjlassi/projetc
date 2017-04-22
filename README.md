@@ -44,5 +44,5 @@ $ make clean
 ## Test des fuites mémoires
 ```sh
 $ make cunit
-$ valgrind ./testUnit
+$ valgrind --leak-check=full --show-leak-kinds=all ./testUnit
 ```

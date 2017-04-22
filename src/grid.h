@@ -14,7 +14,10 @@
 #include <math.h>
 #include <time.h>
 
-/*Definition du type bool*/
+ /**
+ * \struct bool
+ * \brief Définition du type bool
+ */
 typedef int bool;
 #define true 1
 #define false 0
@@ -29,8 +32,8 @@ typedef int bool;
  *
  */
 typedef struct{
-	unsigned char ** block;
-	unsigned int size;
+	unsigned char ** block; /**< les cases de la grille. */
+	unsigned int size;	/**< le nombre de case d'un coté de la grille(carré). */
 } Grid
 ;
 
@@ -52,7 +55,7 @@ Grid* createGrid(int size);
 void releaseGrid(Grid *grd);
 
 /**
- * \fn Grid initGridRandom(int size)
+ * \fn Grid* initGridRandom(int size)
  * \brief Fonction de création d'une nouvelle grille rempli avec des valeurs aléatoires.
  *
  * \param size taille de la grille carrée a créer.
@@ -62,11 +65,10 @@ Grid* initGridRandom(int size);
 
 
 /**
- * \fn Grid initGridFromFile(char* file)
+ * \fn Grid* initGridFromFile(char* file)
  * \brief Fonction de création d'une nouvelle grille, avec un fichier d'entrée.
  *
  * \param file le fichier pour instancier la grille.
- * \param size taille de la grille carrée.
  * \return Instance nouvellement allouée d'un objet de type Grid ou NULL.
  */
 Grid* initGridFromFile(char* file);
@@ -96,7 +98,7 @@ char *** identifyComponent4(Grid grd);
 
 
 /**
- * \fn colorFill(Grid *grd,unsigned int x,unsigned int y,char colorTarget, char colorRep)
+ * \fn void colorFill(Grid *grd,unsigned int x,unsigned int y,char colorTarget, char colorRep)
  *
  * \brief Fonction de remplissage sur la case selectionnée
  *
@@ -109,7 +111,7 @@ char *** identifyComponent4(Grid grd);
 void colorFill(Grid *grd,unsigned int x,unsigned int y,char colorTarget,char colorRep);
 
 /**
- * \fn colorFill(Grid *grd,unsigned int x,unsigned int y)
+ * \fn void colorFlood(Grid *grd,unsigned int x,unsigned int y)
  *
  * \brief Fonction de remplissage de la composante 4 connexe en utilisant la couleur de la case selectionnée 
  *
@@ -120,7 +122,7 @@ void colorFill(Grid *grd,unsigned int x,unsigned int y,char colorTarget,char col
 void colorFlood(Grid *grd,unsigned int x,unsigned int y);
 
 /**
- * \fn bool checkFullGrid(Grid grd)
+ * \fn bool checkFullGrid(Grid* grd)
  * \brief Fonction de test de la présence de la même valeur dans toutes les cases.
  *
  * \param grd la grille à tester.

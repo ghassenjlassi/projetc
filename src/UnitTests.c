@@ -18,6 +18,10 @@
 #include <CUnit/Basic.h>
 #include "grid.c"
 
+/**
+ * \fn void test_init_grid(void)
+ * \brief Test Unitaire de la fonction createGrid()
+ */
 void test_init_grid(void){
 	unsigned int n =5;
 	Grid *c;
@@ -27,6 +31,10 @@ void test_init_grid(void){
 	releaseGrid(c);
 }
 
+/**
+ * \fn void test_init_grid_random()
+ * \brief Test Unitaire de la fonction initGridRandom()
+ */
 void test_init_grid_random(){
     unsigned int n =6;
 	Grid* c;
@@ -36,11 +44,21 @@ void test_init_grid_random(){
 	releaseGrid(c);
 } 
 
+/**
+ * \fn void test_init_grid_file()
+ * \brief Test Unitaire de la fonction initGridFromFile()
+ */
 void test_init_grid_file(){
-	CU_ASSERT(initGridFromFile("grilles/grilleTest.txt")!=NULL); 
-	CU_ASSERT(initGridFromFile("grilles/fichier.inexistant")==NULL);
+	Grid *c;
+	c=initGridFromFile("grilles/grilleTest.txt");
+	CU_ASSERT(c!=NULL);
+	releaseGrid(c);
 } 
 
+/**
+ * \fn void test_change_color()
+ * \brief Test Unitaire de la fonction changeCaseColor()
+ */
 void test_change_color(){
 	Grid* c;
 	c = initGridFromFile("grilles/grilleTest.txt"); 
@@ -49,10 +67,18 @@ void test_change_color(){
 	releaseGrid(c);
 }
 
+/**
+ * \fn void test_colorflood()
+ * \brief Test Unitaire de la fonction colorFlood()
+ */
 void test_colorflood(){
 	        
 }
 
+/**
+ * \fn void test_fullgrid()
+ * \brief Test Unitaire de la fonction checkFullGrid()
+ */
 void test_fullgrid(){
     unsigned int n=5;
 	Grid *c,*c2;
@@ -72,6 +98,12 @@ void test_fullgrid(){
 	releaseGrid(c);
 	releaseGrid(c2);	
 } 
+
+/**
+ * \fn int main()
+ * \brief Jeu de test Cunit
+ * \return 0 en cas de succes
+ */
 int main() {
  	CU_pSuite pSuite = NULL;
 
