@@ -1,8 +1,8 @@
 # ColorCalm
-##Prerequis
+## Prerequis
 Gcc,CUnit(pour les tests unitaires),Doxygen(pour généner la doc),
 
-##Installation et Utilisation
+## Installation et Utilisation
 
 Lancez le jeu ColorCalm.
 ```sh
