@@ -1,10 +1,22 @@
 # ColorCalm
-##Prerequis
-Gcc,CUnit(pour les tests unitaires),Doxygen(pour généner la doc),
+## Prerequis
+Gcc 6.3.0
+```sh
+$ sudo apt install gcc	
+```
+CUnit(pour les tests unitaires)
+```sh
+$ sudo apt-get install libcunit1 libcunit1-doc libcunit1-dev
+```
 
-##Installation et Utilisation
+Doxygen(pour généner la doc)
+```sh
+$ sudo apt install doxygen graphviz
+```
 
-Lancez le jeu ColorCalm.
+## Installation et Utilisation
+
+Lancez ColorCalm.
 ```sh
 $ make	
 $ ./game
@@ -21,5 +33,9 @@ $ make doc
 ``` 
 la doc est dispo au format HTML dans ./Doc/html/index.html
 
+## Désinstallation/Nettoyage
+```sh
+$ make clean
+``` 
 ## Autre
 Ce projet est en cours de réalisation :)
