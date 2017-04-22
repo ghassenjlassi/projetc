@@ -13,6 +13,10 @@ Doxygen(pour généner la doc)
 ```sh
 $ sudo apt install doxygen graphviz
 ```
+Valgrind(test des fuites memoires)
+```sh
+$ sudo apt install valgrind
+```
 
 ## Installation et Utilisation
 
@@ -37,5 +41,8 @@ la doc est dispo au format HTML dans ./Doc/html/index.html
 ```sh
 $ make clean
 ``` 
-## Autre
-Ce projet est en cours de réalisation :)
+## Test des fuites mémoires
+```sh
+$ make cunit
+$ valgrind ./testUnit
+```
