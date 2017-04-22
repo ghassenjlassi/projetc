@@ -18,21 +18,21 @@
 
 // ---------- Declaration des fonctions --------------------
 
-Grid createGrid(int size){
+Grid* createGrid(int size){
 	int i;
-	Grid grid_final;
-	grid_final.size = size;
-	grid_final.block = NULL;
-	grid_final.block = /*(char **)*/ malloc(size*sizeof(char *));
+	Grid *grid_final;
+	grid_final=malloc(1*sizeof(Grid));
+	grid_final->size = size;
+	grid_final->block = NULL;
+	grid_final->block = /*(char **)*/ malloc(size*sizeof(char *));
 	for (i=0 ; i<size ; i++)
 	{
-		grid_final.block[i] = /*(char *)*/ malloc (size*sizeof(char));
+		grid_final->block[i] = /*(char *)*/ malloc (size*sizeof(char));
 	}
 	return grid_final;
 }
 
 void releaseGrid(Grid *grd){
-	//TODO : TEST
 	unsigned int i;
 	for (i=0 ; i < grd->size ; i++)
 	{
@@ -40,13 +40,14 @@ void releaseGrid(Grid *grd){
 		grd->block[i] = NULL;
 	}
 	free(grd->block);
-	grd = NULL;
+	free(grd);
+	grd=NULL;
 }
 
-Grid initGridRandom(int size){
+Grid* initGridRandom(int size){
 	int i,j,r;
 	srand(time(NULL));
-	Grid grid_final = createGrid(size);
+	Grid *grid_final = createGrid(size);
 	for (i = 0; i<size ; i++)
 	{
 		for (j = 0 ; j<size ; j++)
@@ -55,27 +56,27 @@ Grid initGridRandom(int size){
 			switch (r)
 			{
 				case 1:
-				grid_final.block[i][j]='R';
+				grid_final->block[i][j]='R';
 				break;
 
 				case 2:
-				grid_final.block[i][j]='V';
+				grid_final->block[i][j]='V';
 				break;
 
 				case 3:
-				grid_final.block[i][j]='B';
+				grid_final->block[i][j]='B';
 				break;
 
 				case 4:
-				grid_final.block[i][j]='J';
+				grid_final->block[i][j]='J';
 				break;
 
 				case 5:
-				grid_final.block[i][j]='O';
+				grid_final->block[i][j]='O';
 				break;
 
 				case 6:
-				grid_final.block[i][j]='M';
+				grid_final->block[i][j]='M';
 				break;
 			}
 		}
@@ -83,13 +84,14 @@ Grid initGridRandom(int size){
 	return grid_final;
 }
 
-Grid initGridFromFile(char* file){
+Grid* initGridFromFile(char* file){
 	//TODO: Ouverture et lecture de la taille du fichier
 	//TODO: Definir size avec la taille du fichier
 	//TODO: Appel de createGrid(size)
 	//TODO: Affectation de toutes les cases avec les valeurs du fichier
-	//pas sur
 	FILE *fd = fopen(file,"r+");
+	if(fd == NULL)
+		return NULL;
 	fseek(fd,0,SEEK_SET);
 	char buf;
 	int size= 0;
@@ -98,22 +100,22 @@ Grid initGridFromFile(char* file){
 	fseek(fd,0,SEEK_SET);
 
 	int sideSize=(int)sqrt((float)size);
-	Grid grd=createGrid(sideSize);
+	Grid *grd;
+	grd=createGrid(sideSize);
 	int i,j;
 
 	for(i=0;i<sideSize;i++){
 		for(j=0;j<sideSize;j++){
 			fread(&buf,sizeof(char),1,fd);
-			grd.block[i][j]=buf;
+			grd->block[i][j]=buf;
 		}
 	}
 	fclose(fd);
 	return grd;
 }
 
-bool changeCaseColor(Grid *grd,unsigned int x,unsigned int y,char color){
+void changeCaseColor(Grid *grd,unsigned int x,unsigned int y,char color){
 	grd->block[x][y]=color;
-	return true;
 }
 
 /*char *** identifyComponent4(Grid grd){
@@ -143,14 +145,14 @@ void colorFlood(Grid *grd,unsigned int x,unsigned int y){
 	colorFill(grd,0,0,grd->block[0][0],grd->block[x][y]);	
 }
 
-bool checkFullGrid(Grid grd){
+bool checkFullGrid(Grid* grd){
 	//TODO: Test si toute la grille a la meme valeur
 	int i,j;
-	char value = grd.block[0][0];
-	int size = grd.size;
+	char value = grd->block[0][0];
+	int size = grd->size;
 	for(i=0;i<size;i++)
 		for(j=0;j<size;j++)
-			if(grd.block[i][j] != value)
+			if(grd->block[i][j] != value)
 				return false;
 	return true;
 }

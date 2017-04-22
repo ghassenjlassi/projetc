@@ -12,14 +12,14 @@
 #include "grid.c"
 #include <stdio.h>
 
-void showGrid(Grid grd);
+void showGrid(Grid* grd);
 void showMenu();
 
 int main(){
 	printf("ColorFlood\n");
 	int choix,size,x,y;
 	char file[255], color;
-	Grid G;
+	Grid *G=NULL;
 	while(1) {
 		showMenu();
 		fflush(stdin);
@@ -30,6 +30,8 @@ int main(){
 				fflush(stdin);
 				scanf("%d",&size);
 				printf("\n");
+				if(G!=NULL)
+					releaseGrid(G);
 				G=createGrid(size);
 				printf("Grille initialisée\n");
 				break;
@@ -38,6 +40,8 @@ int main(){
 				fflush(stdin);
 				scanf("%d",&size);
 				printf("\n");
+				if(G!=NULL)
+					releaseGrid(G);
 				G=initGridRandom(size);
 				showGrid(G);
 				break;
@@ -46,8 +50,10 @@ int main(){
 				fflush(stdin);
 				scanf("%s",file);
 				printf("\n");
+				if(G!=NULL)
+					releaseGrid(G);
 				G=initGridFromFile(file);
-				if(&G!=NULL)
+				if(G!=NULL)
 					showGrid(G);	
 				else
 					printf("Erreur de fichier\n");
@@ -57,14 +63,14 @@ int main(){
 				fflush(stdin);
 				scanf("%d %d %c",&x,&y,&color);
 				printf("\n");
-				changeCaseColor(&G,x,y,color);
+				changeCaseColor(G,x,y,color);
 				showGrid(G);
 				break;
 			case 5:
-				printf("Saisir la position de la case dans la grille (tapez : x (espace) y: ");
+				printf("Saisir la position de la case dans la grille (tapez : x (espace) y) : ");
 				scanf("%d %d",&x,&y);
 				printf("\n");
-				colorFlood(&G,x,y);
+				colorFlood(G,x,y);
 				showGrid(G);
 				break;
 			case 6:
@@ -74,9 +80,12 @@ int main(){
 					printf("Grille PAS pleine\n");
 				break;
 			case 7:
-				releaseGrid(&G);
+				if(G!=NULL)
+					releaseGrid(G);
 				break;
 			case 8:
+				if(G!=NULL)
+					releaseGrid(G);
 				return 0;
 				break;
 			default:
@@ -87,11 +96,11 @@ int main(){
 	return 0;
 }
 
-void showGrid(Grid grd){
+void showGrid(Grid* grd){
 	unsigned int i,j;
-	for(i=0;i<grd.size;i++){
-		for(j=0;j<grd.size;j++){
-			printf("%c ",grd.block[i][j]);
+	for(i=0;i<grd->size;i++){
+		for(j=0;j<grd->size;j++){
+			printf("%c ",grd->block[i][j]);
 		}
 		printf("\n");
 	}

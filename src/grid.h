@@ -41,7 +41,7 @@ typedef struct{
  * \param size taille de la grille carrée a créer.
  * \return Instance nouvellement allouée d'un objet de type Grid ou NULL.
  */
-Grid createGrid(int size);
+Grid* createGrid(int size);
 
 /**
  * \fn releaseGrid(Grid *grd)
@@ -58,7 +58,7 @@ void releaseGrid(Grid *grd);
  * \param size taille de la grille carrée a créer.
  * \return Instance nouvellement allouée d'un objet de type Grid ou NULL.
  */
-Grid initGridRandom(int size);
+Grid* initGridRandom(int size);
 
 
 /**
@@ -69,7 +69,7 @@ Grid initGridRandom(int size);
  * \param size taille de la grille carrée.
  * \return Instance nouvellement allouée d'un objet de type Grid ou NULL.
  */
-Grid initGridFromFile(char* file);
+Grid* initGridFromFile(char* file);
 
 
 /**
@@ -82,7 +82,7 @@ Grid initGridFromFile(char* file);
  * \param color la couleur de la case à modifier.
  * \return true si couleur correctement changée, false sinon.
  */
-bool changeCaseColor(Grid *grd,unsigned int x,unsigned int y,char color);
+void changeCaseColor(Grid *grd,unsigned int x,unsigned int y,char color);
 
 
 /**
@@ -126,4 +126,4 @@ void colorFlood(Grid *grd,unsigned int x,unsigned int y);
  * \param grd la grille à tester.
  * \return true si grille remplie avec la même valeur, false sinon.
  */
-bool checkFullGrid(Grid grd);
+bool checkFullGrid(Grid* grd);

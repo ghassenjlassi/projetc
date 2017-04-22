@@ -20,29 +20,33 @@
 
 void test_init_grid(void){
 	unsigned int n =5;
-	Grid c = createGrid(n);
-    CU_ASSERT(c.size == n);
-    CU_ASSERT(sizeof c.block == sizeof (n*n*sizeof(char)));
-	releaseGrid(&c);
+	Grid *c;
+	c = createGrid(n);
+    CU_ASSERT(c->size == n);
+    CU_ASSERT(sizeof c->block == sizeof (n*n*sizeof(char)));
+	releaseGrid(c);
 }
 
 void test_init_grid_random(){
     unsigned int n =6;
-	Grid c = createGrid(n);
-    CU_ASSERT(c.size == n);
-    CU_ASSERT(sizeof c.block == sizeof (n*n*sizeof(char)));       
-	releaseGrid(&c);
+	Grid* c;
+	c = createGrid(n);
+    CU_ASSERT(c->size == n);
+    CU_ASSERT(sizeof c->block == sizeof (n*n*sizeof(char)));       
+	releaseGrid(c);
 } 
 
 void test_init_grid_file(){
-	        
+	CU_ASSERT(initGridFromFile("grilles/grilleTest.txt")!=NULL); 
+	CU_ASSERT(initGridFromFile("grilles/fichier.inexistant")==NULL);
 } 
 
 void test_change_color(){
-	Grid c = initGridFromFile("grilles/grilleTest.txt"); 
-    changeCaseColor(&c,3,2,'B');
-     CU_ASSERT(c.block [3][2] == 'B');      
-	releaseGrid(&c);
+	Grid* c;
+	c = initGridFromFile("grilles/grilleTest.txt"); 
+    changeCaseColor(c,3,2,'B');
+    CU_ASSERT(c->block [3][2] == 'B');      
+	releaseGrid(c);
 }
 
 void test_colorflood(){
@@ -51,21 +55,22 @@ void test_colorflood(){
 
 void test_fullgrid(){
     unsigned int n=5;
-	Grid c = createGrid(n);
+	Grid *c,*c2;
+	c = createGrid(n);
     unsigned int i,j;
     for (i=0; i < n; i++)
    	{
     	for (j=0; j < n; j++)
         {
-             c.block[i][j]='B';
+             c->block[i][j]='B';
         }
     }    
 	CU_ASSERT(checkFullGrid(c) == true);
 	
-	Grid c2 = initGridFromFile("grilles/grilleTest.txt");
+	c2 = initGridFromFile("grilles/grilleTest.txt");
 	CU_ASSERT(checkFullGrid(c2) == false);
-	releaseGrid(&c);
-	releaseGrid(&c2);	
+	releaseGrid(c);
+	releaseGrid(c2);	
 } 
 int main() {
  	CU_pSuite pSuite = NULL;
@@ -85,7 +90,13 @@ int main() {
          CU_cleanup_registry();
          return CU_get_error();
 	}
+
     if (CU_add_test (pSuite, "test_init_grid_random()",test_init_grid_random)==NULL) {
+         CU_cleanup_registry();
+         return CU_get_error();
+    }
+
+	if (CU_add_test (pSuite, "test_init_grid_file()",test_init_grid_file)==NULL) {
          CU_cleanup_registry();
          return CU_get_error();
     }
