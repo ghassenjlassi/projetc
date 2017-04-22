@@ -37,7 +37,7 @@ void test_init_grid_file(){
 } 
 
 void test_change_color(){
-	Grid c = initGridFromFile("../grilles/grilleTest.txt"); 
+	Grid c = initGridFromFile("grilles/grilleTest.txt"); 
     changeCaseColor(&c,3,2,'B');
      CU_ASSERT(c.block [3][2] == 'B');      
 }
@@ -59,7 +59,7 @@ void test_fullgrid(){
     }    
 	CU_ASSERT(checkFullGrid(c) == true);
 	
-	Grid c2 = initGridFromFile("../grilles/grilleTest.txt");
+	Grid c2 = initGridFromFile("grilles/grilleTest.txt");
 	CU_ASSERT(checkFullGrid(c2) == false);
 	
 } 
@@ -103,3 +103,4 @@ int main() {
 
  	return 0;
  }
+
