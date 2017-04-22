@@ -20,9 +20,10 @@
 
 void test_init_grid(void){
 	unsigned int n =5;
-Grid c = createGrid(n);
+	Grid c = createGrid(n);
     CU_ASSERT(c.size == n);
     CU_ASSERT(sizeof c.block == sizeof (n*n*sizeof(char)));
+	releaseGrid(&c);
 }
 
 void test_init_grid_random(){
@@ -30,6 +31,7 @@ void test_init_grid_random(){
 	Grid c = createGrid(n);
     CU_ASSERT(c.size == n);
     CU_ASSERT(sizeof c.block == sizeof (n*n*sizeof(char)));       
+	releaseGrid(&c);
 } 
 
 void test_init_grid_file(){
@@ -40,6 +42,7 @@ void test_change_color(){
 	Grid c = initGridFromFile("grilles/grilleTest.txt"); 
     changeCaseColor(&c,3,2,'B');
      CU_ASSERT(c.block [3][2] == 'B');      
+	releaseGrid(&c);
 }
 
 void test_colorflood(){
@@ -61,7 +64,8 @@ void test_fullgrid(){
 	
 	Grid c2 = initGridFromFile("grilles/grilleTest.txt");
 	CU_ASSERT(checkFullGrid(c2) == false);
-	
+	releaseGrid(&c);
+	releaseGrid(&c2);	
 } 
 int main() {
  	CU_pSuite pSuite = NULL;
