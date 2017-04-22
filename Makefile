@@ -1,12 +1,15 @@
-all : sortie 
+all : game
 
-sortie :
-	gcc -o sortie UnitTests.c -lcunit -lm 
+game :
+	gcc -o game main.c -lm -Wall -Wextra
+
+cunit :
+	gcc -o testUnit UnitTests.c -lcunit -lm -Wall -Wextra
 
 doc:
 	doxygen doxygen.config
 
-
 clean:
-				rm -f  sortie 
-				rm -rf ./doc
+	rm -f  game
+	rm -f testUnit
+	rm -rf ./doc

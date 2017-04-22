@@ -5,7 +5,7 @@
  * \version 0.1
  * \date 19 avril 2017
  *
- * Fonctions de creation, de modifiaction, de destructions de la grille.
+ * Fonctions de creation, de modification, de destruction de la grille.
  *
  */
 
@@ -15,13 +15,10 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
+
 // ---------- Declaration des fonctions --------------------
 
 Grid createGrid(int size){
-	//TODO: Instanciation dynamique de la grille
-	//
-	//je sais pas si ca marche vraiment mais ca compile :)
-	//
 	int i;
 	Grid grid_final;
 	grid_final.size = size;
@@ -35,8 +32,8 @@ Grid createGrid(int size){
 }
 
 void releaseGrid(Grid *grd){
-	//TODO: Destruction de la grille -> free()
-	int i;
+	//TODO : TEST
+	unsigned int i;
 	for (i=0 ; i < grd->size ; i++)
 	{
 		free(grd->block[i]);
@@ -47,14 +44,9 @@ void releaseGrid(Grid *grd){
 }
 
 Grid initGridRandom(int size){
-	//TODO: Appel de createGrid(size)  DONE
-	//TODO: Affectation de toutes les valeurs de la grille avec des couleurs au hasard -> rand() % 6 DONE
 	int i,j,r;
-
 	srand(time(NULL));
-
 	Grid grid_final = createGrid(size);
-
 	for (i = 0; i<size ; i++)
 	{
 		for (j = 0 ; j<size ; j++)
@@ -85,12 +77,9 @@ Grid initGridRandom(int size){
 				case 6:
 				grid_final.block[i][j]='M';
 				break;
-
 			}
-
 		}
 	}
-
 	return grid_final;
 }
 
@@ -118,24 +107,23 @@ Grid initGridFromFile(char* file){
 			grd.block[i][j]=buf;
 		}
 	}
+	fclose(fd);
 	return grd;
 }
 
 bool changeCaseColor(Grid *grd,unsigned int x,unsigned int y,char color){
-	//TODO: Verifie que la couleur existe
-	//TODO: Changement de couleur
-		grd->block[x][y]=color;
-		return true;
+	grd->block[x][y]=color;
+	return true;
 }
 
-char *** identifyComponent4(Grid grd){
+/*char *** identifyComponent4(Grid grd){
 	//TODO: Identifier la composante...
 	return NULL;
-}
+}*/
 
 bool colorFlood(Grid *grd,unsigned int x,unsigned int y,char color){
 	// voir https://fr.wikipedia.org/wiki/Algorithme_de_remplissage_par_diffusion#Variante_4-connexe
-
+	//TODO : Test
 	if(color == grd->block[x][y])
 		return true;
 	else {
@@ -149,8 +137,8 @@ bool colorFlood(Grid *grd,unsigned int x,unsigned int y,char color){
 		if(y!=grd->size)
 			colorFlood(grd,x,y+1,color);
 	}
+	return false;
 }
-//algo du pot de peinture/Composante 4 Connexe
 
 bool checkFullGrid(Grid grd){
 	//TODO: Test si toute la grille a la meme valeur
@@ -164,6 +152,7 @@ bool checkFullGrid(Grid grd){
 	return true;
 }
 
+/*
 int main(){
     Grid g = initGridFromFile("grilleTest.txt");
     int i,j;
@@ -179,3 +168,4 @@ int main(){
     return 0;
 
 }
+*/

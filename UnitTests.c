@@ -10,7 +10,7 @@
  */
 #include <stdlib.h>
 #include <stdio.h>
-#include <ncurses.h>
+//#include <ncurses.h>
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
@@ -19,15 +19,15 @@
 #include "grid.c"
 
 void test_init_grid(void){
-	int n =5;
+	unsigned int n =5;
 Grid c = createGrid(n);
     CU_ASSERT(c.size == n);
     CU_ASSERT(sizeof c.block == sizeof (n*n*sizeof(char)));
 }
 
 void test_init_grid_random(){
-	   int n =6;
-Grid c = createGrid(n);
+    unsigned int n =6;
+	Grid c = createGrid(n);
     CU_ASSERT(c.size == n);
     CU_ASSERT(sizeof c.block == sizeof (n*n*sizeof(char)));       
 } 
@@ -42,26 +42,26 @@ void test_change_color(){
      CU_ASSERT(c.block [3][2] == 'B');      
 }
 
-void test_(){
-	        
-} 
-
 void test_colorflood(){
 	        
 }
 
 void test_fullgrid(){
-    int n=5;
-	    Grid c = createGrid(n);
-        int i,j;
-        for (int i = 0; i < n; i++)
-            {
-               for (int j = 0; j < n; j++)
-               {
-                   c.block[i][j]='B';
-               }
-            }    
-CU_ASSERT(checkFullGrid(c) == true);
+    unsigned int n=5;
+	Grid c = createGrid(n);
+    unsigned int i,j;
+    for (i=0; i < n; i++)
+   	{
+    	for (j=0; j < n; j++)
+        {
+             c.block[i][j]='B';
+        }
+    }    
+	CU_ASSERT(checkFullGrid(c) == true);
+	
+	Grid c2 = initGridFromFile("grilleTest.txt");
+	CU_ASSERT(checkFullGrid(c2) == false);
+	
 } 
 int main() {
  	CU_pSuite pSuite = NULL;
@@ -77,27 +77,29 @@ int main() {
  		return CU_get_error();
  	}
 
-     if (CU_add_test (pSuite, "test_init_grid()",test_init_grid)==NULL) {
+    if (CU_add_test (pSuite, "test_init_grid()",test_init_grid)==NULL) {
          CU_cleanup_registry();
          return CU_get_error();
-     }
-     if (CU_add_test (pSuite, "test_init_grid_random()",test_init_grid_random)==NULL) {
+	}
+    if (CU_add_test (pSuite, "test_init_grid_random()",test_init_grid_random)==NULL) {
          CU_cleanup_registry();
          return CU_get_error();
-     }
-    /*  if (CU_add_test (pSuite, "test_change_color()",test_change_color)==NULL) {
+    }
+
+    if (CU_add_test (pSuite, "test_change_color()",test_change_color)==NULL) {
          CU_cleanup_registry();
          return CU_get_error();
-     }*/
-     if (CU_add_test (pSuite, "test_fullgrid",test_fullgrid)==NULL) {
+    }
+
+    if (CU_add_test (pSuite, "test_fullgrid",test_fullgrid)==NULL) {
          CU_cleanup_registry();
          return CU_get_error();
-     }
+    }
 
 
-     CU_basic_set_mode(CU_BRM_VERBOSE);
-     CU_basic_run_tests();
-     CU_cleanup_registry();
+    CU_basic_set_mode(CU_BRM_VERBOSE);
+    CU_basic_run_tests();
+    CU_cleanup_registry();
 
  	return 0;
  }
