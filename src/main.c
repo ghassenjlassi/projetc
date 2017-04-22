@@ -61,11 +61,10 @@ int main(){
 				showGrid(G);
 				break;
 			case 5:
-
-				printf("Saisir la position de la premiere case à remplir et la couleur dans la grille (tapez : x (espace) y (espace) couleur): ");
-				scanf("%d %d %c",&x,&y,&color);
+				printf("Saisir la position de la case dans la grille (tapez : x (espace) y: ");
+				scanf("%d %d",&x,&y);
 				printf("\n");
-				colorFlood(&G,x,y,color);
+				colorFlood(&G,x,y);
 				showGrid(G);
 				break;
 			case 6:
@@ -103,7 +102,7 @@ void showMenu(){
 	printf("2) Initialiser la grille au hasard\n");
 	printf("3) Initialiser la grille avec un fichier\n");
 	printf("4) Changer la couleur d'une case\n");
-	printf("5) Remplissage\n");
+	printf("5) Remplissage/ColorFlood\n");
 	printf("6) Tester si la grile est pleine\n");
 	printf("7) Détruire la grille\n");
 	printf("8) Quitter\n");

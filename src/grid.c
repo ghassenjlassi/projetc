@@ -121,23 +121,26 @@ bool changeCaseColor(Grid *grd,unsigned int x,unsigned int y,char color){
 	return NULL;
 }*/
 
-bool colorFlood(Grid *grd,unsigned int x,unsigned int y,char color){
-	// voir https://fr.wikipedia.org/wiki/Algorithme_de_remplissage_par_diffusion#Variante_4-connexe
-	//TODO : Test
-	if(color == grd->block[x][y])
-		return true;
-	else {
-		grd->block[x][y]=color;
-		if(x>0)
-			colorFlood(grd,x-1,y,color);
-		if(x<grd->size)
-			colorFlood(grd,x+1,y,color);
-		if(y>0)
-			colorFlood(grd,x,y-1,color);
-		if(y<grd->size)
-			colorFlood(grd,x,y+1,color);
-	}
-	return false;
+void colorFill(Grid *grd,unsigned int x,unsigned int y,char colorTarget,char colorRep){
+	// voir https://en.wikipedia.org/wiki/Flood_Fill
+	if(colorTarget == colorRep)
+		return;
+	if(colorTarget != grd->block[x][y])
+		return;
+	grd->block[x][y]=colorRep;
+	if(x!=0)
+		colorFill(grd,x-1,y,colorTarget,colorRep);
+	if(x!=grd->size-1)
+			colorFill(grd,x+1,y,colorTarget,colorRep);
+	if(y!=0)
+			colorFill(grd,x,y-1,colorTarget,colorRep);
+	if(y!=grd->size-1)
+			colorFill(grd,x,y+1,colorTarget,colorRep);
+	return;
+}
+
+void colorFlood(Grid *grd,unsigned int x,unsigned int y){
+	colorFill(grd,0,0,grd->block[0][0],grd->block[x][y]);	
 }
 
 bool checkFullGrid(Grid grd){

@@ -96,17 +96,28 @@ char *** identifyComponent4(Grid grd);
 
 
 /**
- * \fn bool colorFlood(Grid *grd,unsigned int x,unsigned int y,char color)
+ * \fn colorFill(Grid *grd,unsigned int x,unsigned int y,char colorTarget, char colorRep)
  *
  * \brief Fonction de remplissage sur la case selectionnée
  *
  * \param grd la grille à modifier.
  * \param x la coordonnée x de la case selectionnée(case de départ).
  * \param y la coordonnée y de la case selectionnée(case de départ).
- * \param color la couleur de la case à modifier.
- * \return true si couleur correctement changée, false sinon.
+ * \param colorTarget la couleur à appliquer.
+ * \param colorRep la couleur des cases à modifier.
  */
-bool colorFlood(Grid *grd,unsigned int x,unsigned int y,char color);
+void colorFill(Grid *grd,unsigned int x,unsigned int y,char colorTarget,char colorRep);
+
+/**
+ * \fn colorFill(Grid *grd,unsigned int x,unsigned int y)
+ *
+ * \brief Fonction de remplissage de la composante 4 connexe en utilisant la couleur de la case selectionnée 
+ *
+ * \param grd la grille à modifier.
+ * \param x la coordonnée x de la case selectionnée.
+ * \param y la coordonnée y de la case selectionnée.
+ */
+void colorFlood(Grid *grd,unsigned int x,unsigned int y);
 
 /**
  * \fn bool checkFullGrid(Grid grd)
