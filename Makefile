@@ -1,10 +1,10 @@
 all : game
 
 game :
-	gcc -o game main.c -lm -Wall -Wextra
+	gcc -o game src/main.c -lm -Wall -Wextra
 
 cunit :
-	gcc -o testUnit UnitTests.c -lcunit -lm -Wall -Wextra
+	gcc -o testUnit src/UnitTests.c -lcunit -lm -Wall -Wextra
 
 doc:
 	doxygen doxygen.config
