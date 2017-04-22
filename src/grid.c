@@ -128,13 +128,13 @@ bool colorFlood(Grid *grd,unsigned int x,unsigned int y,char color){
 		return true;
 	else {
 		grd->block[x][y]=color;
-		if(x!=0)
+		if(x>0)
 			colorFlood(grd,x-1,y,color);
-		if(x!=grd->size)
+		if(x<grd->size)
 			colorFlood(grd,x+1,y,color);
-		if(y!=0)
+		if(y>0)
 			colorFlood(grd,x,y-1,color);
-		if(y!=grd->size)
+		if(y<grd->size)
 			colorFlood(grd,x,y+1,color);
 	}
 	return false;
@@ -148,24 +148,6 @@ bool checkFullGrid(Grid grd){
 	for(i=0;i<size;i++)
 		for(j=0;j<size;j++)
 			if(grd.block[i][j] != value)
-				return true;
+				return false;
 	return true;
 }
-
-/*
-int main(){
-    Grid g = initGridFromFile("grilleTest.txt");
-    int i,j;
-    i =g.size;
-    j=g.size;
-    for(i=0;i<g.size;i++){
-		for(j=0;j<g.size;j++){
-            printf(" %c",g.block[i][j]);
-		}
-        printf("\n");
-    }
-
-    return 0;
-
-}
-*/
