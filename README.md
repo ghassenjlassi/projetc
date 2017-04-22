@@ -11,7 +11,7 @@ $ sudo apt-get install libcunit1 libcunit1-doc libcunit1-dev
 
 Doxygen(pour généner la doc)
 ```sh
-$ sudo apt install doxygen	
+$ sudo apt install doxygen graphviz
 ```
 
 ## Installation et Utilisation
