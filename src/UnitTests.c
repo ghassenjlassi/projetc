@@ -55,6 +55,18 @@ void test_init_grid_file(){
 	releaseGrid(c);
 } 
 
+
+/**
+ *  * \fn void test_release_grid()
+ *   * \brief Test Unitaire de la fonction releaseGrid()
+ *    */
+void test_release_grid(){
+	Grid *c;
+	c=createGrid(16);
+	releaseGrid(c);
+	CU_ASSERT(sizeof(c) != sizeof(Grid));
+}
+
 /**
  * \fn void test_change_color()
  * \brief Test Unitaire de la fonction changeCaseColor()
@@ -141,6 +153,11 @@ int main() {
     if (CU_add_test (pSuite, "test_fullgrid",test_fullgrid)==NULL) {
          CU_cleanup_registry();
          return CU_get_error();
+    }
+	
+    if (CU_add_test (pSuite, "test_release_grid",test_release_grid)==NULL) {
+          CU_cleanup_registry();
+          return CU_get_error();
     }
 
 
