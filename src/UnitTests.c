@@ -24,8 +24,9 @@
  */
 void test_init_grid(void){
 	unsigned int n =5;
+    unsigned int c =5;
 	Grid *c;
-	c = createGrid(n);
+	c = createGrid(n,c);
     CU_ASSERT(c->size == n);
     CU_ASSERT(sizeof c->block == sizeof (n*n*sizeof(char)));
 	releaseGrid(c);
@@ -37,8 +38,9 @@ void test_init_grid(void){
  */
 void test_init_grid_random(){
     unsigned int n =6;
+    unsigned int c =5;
 	Grid* c;
-	c = createGrid(n);
+	c = createGrid(n,c);
     CU_ASSERT(c->size == n);
     CU_ASSERT(sizeof c->block == sizeof (n*n*sizeof(char)));       
 	releaseGrid(c);
@@ -62,7 +64,7 @@ void test_init_grid_file(){
  *    */
 void test_release_grid(){
 	Grid *c;
-	c=createGrid(16);
+	c=createGrid(16,5);
 	releaseGrid(c);
 	CU_ASSERT(sizeof(c) != sizeof(Grid));
 }
@@ -94,7 +96,7 @@ void test_colorflood(){
 void test_fullgrid(){
     unsigned int n=5;
 	Grid *c,*c2;
-	c = createGrid(n);
+	c = createGrid(n,3);
     unsigned int i,j;
     for (i=0; i < n; i++)
    	{

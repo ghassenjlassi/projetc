@@ -34,6 +34,7 @@ typedef int bool;
 typedef struct{
 	unsigned char ** block; /**< les cases de la grille. */
 	unsigned int size;	/**< le nombre de case d'un coté de la grille(carré). */
+	unsigned int couleur/**<le nombre de couleur*/
 } Grid
 ;
 
@@ -44,7 +45,7 @@ typedef struct{
  * \param size taille de la grille carrée a créer.
  * \return Instance nouvellement allouée d'un objet de type Grid ou NULL.
  */
-Grid* createGrid(int size);
+Grid* createGrid(int size, int couleur);
 
 /**
  * \fn releaseGrid(Grid *grd)
@@ -61,7 +62,7 @@ void releaseGrid(Grid *grd);
  * \param size taille de la grille carrée a créer.
  * \return Instance nouvellement allouée d'un objet de type Grid ou NULL.
  */
-Grid* initGridRandom(int size);
+Grid* initGridRandom(int size, int couleur);
 
 
 /**

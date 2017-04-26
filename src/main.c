@@ -34,7 +34,7 @@ void showMenu();
  */
 int main(){
 	printf("ColorFlood\n");
-	int choix,size,x,y;
+	int choix,size,x,y,c;
 	char file[255], color;
 	Grid *G=NULL;
 	while(1) {
@@ -43,23 +43,25 @@ int main(){
 		scanf("%d",&choix);
 		switch (choix){
 			case 1 :
-				printf("Saisir la taille de la grille : ");
+				printf("Saisir la taille de la grille : et le nombre de couleur");
 				fflush(stdin);
 				scanf("%d",&size);
+				scanf("%d",&c);
 				printf("\n");
 				if(G!=NULL)
 					releaseGrid(G);
-				G=createGrid(size);
+				G=createGrid(size,c);
 				printf("Grille initialisée\n");
 				break;
 			case 2 :
-				printf("Saisir la taille de la grille : ");
+				printf("Saisir la taille de la grille : et le nombre de couleur");
 				fflush(stdin);
 				scanf("%d",&size);
+				scanf("%d",&c);
 				printf("\n");
 				if(G!=NULL)
 					releaseGrid(G);
-				G=initGridRandom(size);
+				G=initGridRandom(size,c);
 				showGrid(G);
 				break;
 			case 3 :

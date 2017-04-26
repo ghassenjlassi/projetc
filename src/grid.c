@@ -18,11 +18,12 @@
 
 // ---------- Declaration des fonctions --------------------
 
-Grid* createGrid(int size){
+Grid* createGrid(int size,int couleur){
 	int i;
 	Grid *grid_final;
 	grid_final=malloc(1*sizeof(Grid));
 	grid_final->size = size;
+	grid_final->couleur = couleur;
 	grid_final->block = malloc(size*sizeof(char *));
 	for (i=0 ; i<size ; i++)
 	{
@@ -43,15 +44,15 @@ void releaseGrid(Grid *grd){
 	grd=NULL;
 }
 
-Grid* initGridRandom(int size){
+Grid* initGridRandom(int size, int c){
 	int i,j,r;
 	srand(time(NULL));
-	Grid *grid_final = createGrid(size);
+	Grid *grid_final = createGrid(size,c);
 	for (i = 0; i<size ; i++)
 	{
 		for (j = 0 ; j<size ; j++)
 		{
-			r = (rand() % 6)+1 ;
+			r = (rand() % c)+1 ;
 			switch (r)
 			{
 				case 1:
@@ -97,7 +98,7 @@ Grid* initGridFromFile(char* file){
 
 	int sideSize=(int)sqrt((float)size);
 	Grid *grd;
-	grd=createGrid(sideSize);
+	grd=createGrid(sideSize,6);
 	int i,j;
 
 	for(i=0;i<sideSize;i++){
