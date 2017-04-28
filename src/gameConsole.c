@@ -25,26 +25,26 @@ void  main(){
 			printf("Veuillez saisir la taille de la grille et le nombre de coup (format : side <espace> limite): ");
 			fflush(stdin);
 			scanf("%d %d",&side,&limit); printf("\n");
-		
+
 			if((limit>0)&&(side>0)){
-				status=0
+				status=0;
 			}
 			else{
-				printf("\n!--Taille et Nombre de Coup doivent etre plus grand que zero--\n")
+				printf("\n!--Taille et Nombre de Coup doivent etre plus grand que zero--\n");
 			}
 		}while(status);
-		
-		Grd=initGridRandom(side,6);	
+
+		Grd=initGridRandom(side,6);
 		bool end=false;
 		int end_condition=0;
 		char c;
 		unsigned int move=1; //le nombre de coup joués
-		
+
 		if(checkFullGrid(Grd)){ /*check victory condition in case of unitary grid*/
 				end=true;
 				end_condition=1;
 			}
-	
+
 		while(!end){
 			showGrid(Grd);
 			do{
@@ -62,9 +62,9 @@ void  main(){
 				}
 				if(status)printf("!-- La couleur doit etre dans [R,V,B,J,O,M] --!");
 			}while(status);
-			
+
 			if(move>limit){  /*checks if player is out of moves*/
-				end=true; 
+				end=true;
 				end_condition=0;
 			}
 			if(checkFullGrid(Grd)){
@@ -72,7 +72,7 @@ void  main(){
 				end_condition=1;
 			}
 		}
-		
+
 		if(end_condition==0){
 			system("clear"); /*clear for linux / cls for windows*/
 			printf("Tu as perdu :(\n");
@@ -97,7 +97,7 @@ void showGrid(Grid* grd){
 }
 
 void showMenu(){
-	printf("1) Initialiser la grille vide\n");	
+	printf("1) Initialiser la grille vide\n");
 	printf("2) Initialiser la grille au hasard\n");
 	printf("3) Initialiser la grille avec un fichier\n");
 	printf("4) Changer la couleur d'une case\n");
