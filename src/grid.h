@@ -22,6 +22,7 @@ typedef int bool;
 #define true 1
 #define false 0
 
+
  /**
  * \struct Grid
  * \brief Objet grille pour le jeu.
@@ -34,9 +35,10 @@ typedef int bool;
 typedef struct{
 	unsigned char ** block; /**< les cases de la grille. */
 	unsigned int size;	/**< le nombre de case d'un coté de la grille(carré). */
-	unsigned int couleur/**<le nombre de couleur*/
+	unsigned int couleur; /**<le nombre de couleur*/
 } Grid
 ;
+
 
 /**
  * \fn Grid createGrid(int size)
@@ -47,6 +49,7 @@ typedef struct{
  */
 Grid* createGrid(int size, int couleur);
 
+
 /**
  * \fn releaseGrid(Grid *grd)
  * \brief Fonction de destruction d'une grille.
@@ -54,6 +57,7 @@ Grid* createGrid(int size, int couleur);
  * \param grd la grille à detruire.
  */
 void releaseGrid(Grid *grd);
+
 
 /**
  * \fn Grid* initGridRandom(int size)
@@ -111,6 +115,7 @@ char *** identifyComponent4(Grid grd);
  */
 void colorFill(Grid *grd,unsigned int x,unsigned int y,char colorTarget,char colorRep);
 
+
 /**
  * \fn void colorFlood(Grid *grd,unsigned int x,unsigned int y)
  *
@@ -121,6 +126,7 @@ void colorFill(Grid *grd,unsigned int x,unsigned int y,char colorTarget,char col
  * \param y la coordonnée y de la case selectionnée.
  */
 void colorFlood(Grid *grd,unsigned int x,unsigned int y);
+
 
 /**
  * \fn bool checkFullGrid(Grid* grd)
