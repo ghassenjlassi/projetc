@@ -12,30 +12,61 @@
 
 Grid *Grd=NULL;
 
+int check_limit(int side, int n){
+	if(n>side || n<0) return 0;
+	else return 1;
+}
+
 void  main(){
 	printf("ColorFlood\n");
-	unsigned int side,limit;
-	printf("Veuillez saisir la taille de la grille et le nombre de coup (format : side <espace> limite): ");
-	fflush(stdin);
-	scanf("%d %d",&side,&limit);
-	printf("\n");
-	Grd=initGridRandom(side,6);
+	unsigned int side,limit,reponse;
+	reponse = 1;
+	while(reponse==1){
+		printf("Veuillez saisir la taille de la grille et le nombre de coup (format : side <espace> limite): ");
+		fflush(stdin);
+		scanf("%d %d",&side,&limit);
+		printf("\n");
+		Grd=initGridRandom(side,6);
+			
+		bool end=false;
+		int end_condition=0;
+		unsigned int x,y;
+		unsigned int move=1; //le nombre de coup joués
+		
+		if(checkFullGrid(Grd)){ /*check in case of unitary grid*/
+				end=true;
+				end_condition=1;
+			}
 	
-	bool end=false;
-	unsigned int x,y;
-	unsigned int move=1; //le nombre de coup joués
-
-	while(!end){
-		showGrid(Grd);
-
-		printf("Coup %d/%d : Saisir position(x (espace) y) :",move,limit);
-                scanf("%d %d",&x,&y);
-                printf("\n");
-
-                colorFlood(Grd,x,y);
-		move=move+1;	
-		if(checkFullGrid(Grd))
-			end=true;
+		while(!end){
+			showGrid(Grd);
+			do{
+				printf("\nCoup %d/%d : Saisir position(x (espace) y) :",move,limit);
+						scanf("%d %d",&x,&y);
+			}while(!check_limit(side,x) || !check_limit(side,y));
+			
+			colorFlood(Grd,x,y);
+			move=move+1;
+			
+			if(move>limit){  /*checks if player is out of moves*/
+				end=true; 
+				end_condition=0;
+			}
+			if(checkFullGrid(Grd)){
+				end=true;
+				end_condition=1;
+			}
+		}
+		if(end_condition==0){
+			system("clear"); /*clear for linux / cls for windows*/
+			printf("Tu as perdu :(");
+		}
+		else{
+			system("clear"); /*clear for linux / cls for windows*/
+			printf("Tu as gagne :)");
+		}
+		printf("\nJouer encore?\n1.Oui\n2.Non\n");
+		scanf("%i",&reponse);
 	}
 }
 
