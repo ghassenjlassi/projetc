@@ -127,6 +127,7 @@ void colorFill(Grid *grd,unsigned int x,unsigned int y,char colorTarget,char col
  */
 void colorFlood(Grid *grd,unsigned int x,unsigned int y);
 
+void colorFlood2(Grid *grd,unsigned char color);
 
 /**
  * \fn bool checkFullGrid(Grid* grd)

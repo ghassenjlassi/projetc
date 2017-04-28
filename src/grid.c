@@ -142,6 +142,11 @@ void colorFlood(Grid *grd,unsigned int x,unsigned int y){
 	colorFill(grd,0,0,grd->block[0][0],grd->block[x][y]);	
 }
 
+
+void colorFlood2(Grid *grd,unsigned char color){
+	colorFill(grd,0,0,grd->block[0][0],color);
+}
+
 bool checkFullGrid(Grid* grd){
 	int i,j;
 	char value = grd->block[0][0];
