@@ -15,7 +15,7 @@ Grid *Grd=NULL;
 
 void  main(){
 	printf("ColorFlood\n");
-	unsigned int side,limit,reponse;
+	int side,limit,reponse;
 	int status=1;
 	reponse = 1;
 	while(reponse==1){
@@ -26,7 +26,7 @@ void  main(){
 			fflush(stdin);
 			scanf("%d %d",&side,&limit); printf("\n");
 
-			if((limit>0)&&(side>0)){
+			if(limit>0 && side>0){
 				status=0;
 			}
 			else{
