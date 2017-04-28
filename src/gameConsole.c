@@ -9,6 +9,7 @@
  *
  */
 #include "gameConsole.h"
+#include "getKey.c"
 
 Grid *Grd=NULL;
 
@@ -41,7 +42,7 @@ void  main(){
 				status = 1;
 				fflush(stdin);
 				printf("\nCoup %d/%d - Couleur? [R,V,B,J,O,M]\n",move,limit);
-				scanf("%c",&c);
+				c=getKey();
 				switch(c){
 					case 'R': colorFlood2(Grd,c);move++;status=0;break;
 					case 'V': colorFlood2(Grd,c);move++;status=0;break;
