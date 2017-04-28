@@ -16,18 +16,27 @@ Grid *Grd=NULL;
 void  main(){
 	printf("ColorFlood\n");
 	unsigned int side,limit,reponse;
+	int status=1;
 	reponse = 1;
 	while(reponse==1){
 		system("clear"); /*clear for linux / cls for windows*/
-		printf("Veuillez saisir la taille de la grille et le nombre de coup (format : side <espace> limite): ");
-		fflush(stdin);
-		scanf("%d %d",&side,&limit);
-		printf("\n");
-		Grd=initGridRandom(side,6);
-			
+		do{
+			status=1;
+			printf("Veuillez saisir la taille de la grille et le nombre de coup (format : side <espace> limite): ");
+			fflush(stdin);
+			scanf("%d %d",&side,&limit); printf("\n");
+		
+			if((limit>0)&&(side>0)){
+				status=0
+			}
+			else{
+				printf("\n!--Taille et Nombre de Coup doivent etre plus grand que zero--\n")
+			}
+		}while(status);
+		
+		Grd=initGridRandom(side,6);	
 		bool end=false;
 		int end_condition=0;
-		int status;
 		char c;
 		unsigned int move=1; //le nombre de coup joués
 		
