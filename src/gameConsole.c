@@ -12,16 +12,12 @@
 
 Grid *Grd=NULL;
 
-int check_limit(int side, int n){
-	if(n>side || n<0) return 0;
-	else return 1;
-}
-
 void  main(){
 	printf("ColorFlood\n");
 	unsigned int side,limit,reponse;
 	reponse = 1;
 	while(reponse==1){
+		system("clear"); /*clear for linux / cls for windows*/
 		printf("Veuillez saisir la taille de la grille et le nombre de coup (format : side <espace> limite): ");
 		fflush(stdin);
 		scanf("%d %d",&side,&limit);
@@ -30,10 +26,11 @@ void  main(){
 			
 		bool end=false;
 		int end_condition=0;
-		unsigned int x,y;
+		int status;
+		char c;
 		unsigned int move=1; //le nombre de coup joués
 		
-		if(checkFullGrid(Grd)){ /*check in case of unitary grid*/
+		if(checkFullGrid(Grd)){ /*check victory condition in case of unitary grid*/
 				end=true;
 				end_condition=1;
 			}
@@ -41,12 +38,20 @@ void  main(){
 		while(!end){
 			showGrid(Grd);
 			do{
-				printf("\nCoup %d/%d : Saisir position(x (espace) y) :",move,limit);
-						scanf("%d %d",&x,&y);
-			}while(!check_limit(side,x) || !check_limit(side,y));
-			
-			colorFlood(Grd,x,y);
-			move=move+1;
+				status = 1;
+				fflush(stdin);
+				printf("\nCoup %d/%d - Couleur? [R,V,B,J,O,M]\n",move,limit);
+				scanf("%c",&c);
+				switch(c){
+					case 'R': colorFlood2(Grd,c);move++;status=0;break;
+					case 'V': colorFlood2(Grd,c);move++;status=0;break;
+					case 'B': colorFlood2(Grd,c);move++;status=0;break;
+					case 'J': colorFlood2(Grd,c);move++;status=0;break;
+					case 'O': colorFlood2(Grd,c);move++;status=0;break;
+					case 'M': colorFlood2(Grd,c);move++;status=0;break;
+				}
+				if(status)printf("!-- La couleur doit etre dans [R,V,B,J,O,M] --!");
+			}while(status);
 			
 			if(move>limit){  /*checks if player is out of moves*/
 				end=true; 
@@ -57,13 +62,14 @@ void  main(){
 				end_condition=1;
 			}
 		}
+		
 		if(end_condition==0){
 			system("clear"); /*clear for linux / cls for windows*/
-			printf("Tu as perdu :(");
+			printf("Tu as perdu :(\n");
 		}
 		else{
 			system("clear"); /*clear for linux / cls for windows*/
-			printf("Tu as gagne :)");
+			printf("Tu as gagne :)\n");
 		}
 		printf("\nJouer encore?\n1.Oui\n2.Non\n");
 		scanf("%i",&reponse);
