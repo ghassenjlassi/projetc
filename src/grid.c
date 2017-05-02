@@ -18,12 +18,11 @@
 
 // ---------- Declaration des fonctions --------------------
 
-Grid* createGrid(int size,int couleur){
+Grid* createGrid(int size){
 	int i;
 	Grid *grid_final;
 	grid_final=malloc(1*sizeof(Grid));
 	grid_final->size = size;
-	grid_final->couleur = couleur;
 	grid_final->block = malloc(size*sizeof(char *));
 	for (i=0 ; i<size ; i++)
 	{
@@ -44,15 +43,15 @@ void releaseGrid(Grid *grd){
 	grd=NULL;
 }
 
-Grid* initGridRandom(int size, int c){
+Grid* initGridRandom(int size){
 	int i,j,r;
 	srand(time(NULL));
-	Grid *grid_final = createGrid(size,c);
+	Grid *grid_final = createGrid(size);
 	for (i = 0; i<size ; i++)
 	{
 		for (j = 0 ; j<size ; j++)
 		{
-			r = (rand() % c)+1 ;
+			r = (rand() % 6)+1 ;
 			switch (r)
 			{
 				case 1:
@@ -98,7 +97,7 @@ Grid* initGridFromFile(char* file){
 
 	int sideSize=(int)sqrt((float)size);
 	Grid *grd;
-	grd=createGrid(sideSize,6);
+	grd=createGrid(sideSize);
 	int i,j;
 
 	for(i=0;i<sideSize;i++){
@@ -141,7 +140,6 @@ void colorFill(Grid *grd,unsigned int x,unsigned int y,char colorTarget,char col
 void colorFlood(Grid *grd,unsigned int x,unsigned int y){
 	colorFill(grd,0,0,grd->block[0][0],grd->block[x][y]);	
 }
-
 
 void colorFlood2(Grid *grd,unsigned char color){
 	colorFill(grd,0,0,grd->block[0][0],color);

@@ -28,13 +28,16 @@ void  main(){
 
 			if(limit>0 && side>0){
 				status=0;
-			}
-			else{
+			} else {
 				printf("\n!--Taille et Nombre de Coup doivent etre plus grand que zero--\n");
 			}
 		}while(status);
+		
+		if(Grd!=NULL){
+			releaseGrid(Grd);
+		}
 
-		Grd=initGridRandom(side,6);
+		Grd=initGridRandom(side);
 		bool end=false;
 		int end_condition=0;
 		char c;
@@ -84,6 +87,7 @@ void  main(){
 		printf("\nJouer encore?\n1.Oui\n2.Non\n");
 		scanf("%i",&reponse);
 	}
+	releaseGrid(Grd);
 }
 
 void showGrid(Grid* grd){
