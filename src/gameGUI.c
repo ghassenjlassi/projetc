@@ -15,7 +15,7 @@ int main()
 	
 	int squareSize=32;
 	Grid *grd;
-	grd=initGridRandom(size,6);
+	grd=initGridRandom(size);
 
 	SDL_Init(SDL_INIT_VIDEO); // Initialisation de la SDL
 	SDL_Surface *ecran = NULL;
@@ -77,11 +77,11 @@ void pauseJeu()
 				continuer = 0;
 				break;
 			case SDL_MOUSEBUTTONUP:
-				if (event.button.button == SDL_BUTTON_RIGHT)
-					continuer = 0;
+			//	if (event.button.button == SDL_BUTTON_RIGHT)
+			//		continuer = 0;
 				/* On arrête le programme si on a fait un clic droit */
-				mousePosition.x=event.button.x;
-				mousePosition.y=event.button.y;
+			//	mousePosition.x=event.button.x;
+			//	mousePosition.y=event.button.y;
 				break;
 
 		}
