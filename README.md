@@ -28,10 +28,10 @@ $ ./game
 
 Lancez ColorCalm GUI (avec SDL).
 Encore en développement. Ne permet que d'afficher la grille.
+! Warning et fuites mémoires non corrigés !
 ```sh
 $ make gameGUI
 $ ./gameGUI
-
 ```
 Lancez le programme de test des fonction.
 ```sh
