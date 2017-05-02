@@ -13,7 +13,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
-
  /**
  * \struct bool
  * \brief Définition du type bool
