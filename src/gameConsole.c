@@ -13,9 +13,10 @@
 
 Grid *Grd=NULL;
 
-void  main(){
+int  main(){
 	printf("ColorFlood\n");
-	int side,limit,reponse;
+	int side,reponse;
+	unsigned int limit;
 	int status=1;
 	reponse = 1;
 	while(reponse==1){

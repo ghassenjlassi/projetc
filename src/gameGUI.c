@@ -4,7 +4,7 @@
 
 void pause();
 
-int main(int argc, char *argv[])
+int main()
 {
 	SDL_Init(SDL_INIT_VIDEO); // Initialisation de la SDL
 	SDL_Surface *ecran = NULL;

@@ -18,7 +18,7 @@
  * \fn void main()
  * \brief programme
  */
-void main();
+int main();
 
 /**
  * \fn void showGrid(Grid* grd)
