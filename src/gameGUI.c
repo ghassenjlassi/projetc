@@ -5,7 +5,7 @@
 
 void pauseJeu();
 
-int main(int argc, char *argv[])
+int main()
 {
 	unsigned int size;
 	fflush(stdin);

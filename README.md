@@ -25,7 +25,20 @@ Lancez ColorCalm.
 $ make	
 $ ./game
 ```
-Lancez les tests unitaires.
+
+Lancez ColorCalm GUI (avec SDL).
+Encore en développement. Ne permet que d'afficher la grille.
+```sh
+$ make gameGUI
+$ ./gameGUI
+
+```
+Lancez le programme de test des fonction.
+```sh
+$ make test
+$ ./test
+```
+Lancez les tests unitaires(avec CUnit).
 ```sh
 $ make cunit
 $ ./unitTest
@@ -45,4 +58,5 @@ $ make clean
 ```sh
 $ make cunit
 $ valgrind --leak-check=full --show-leak-kinds=all ./testUnit
+$ valgrind --leak-check=full --show-leak-kinds=all ./game
 ```

@@ -13,7 +13,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
-
  /**
  * \struct bool
  * \brief Définition du type bool
@@ -21,7 +20,6 @@
 typedef int bool;
 #define true 1
 #define false 0
-
 
  /**
  * \struct Grid
@@ -35,10 +33,8 @@ typedef int bool;
 typedef struct{
 	unsigned char ** block; /**< les cases de la grille. */
 	unsigned int size;	/**< le nombre de case d'un coté de la grille(carré). */
-	unsigned int couleur; /**<le nombre de couleur*/
 } Grid
 ;
-
 
 /**
  * \fn Grid createGrid(int size)
@@ -47,8 +43,7 @@ typedef struct{
  * \param size taille de la grille carrée a créer.
  * \return Instance nouvellement allouée d'un objet de type Grid ou NULL.
  */
-Grid* createGrid(int size, int couleur);
-
+Grid* createGrid(int size);
 
 /**
  * \fn releaseGrid(Grid *grd)
@@ -58,7 +53,6 @@ Grid* createGrid(int size, int couleur);
  */
 void releaseGrid(Grid *grd);
 
-
 /**
  * \fn Grid* initGridRandom(int size)
  * \brief Fonction de création d'une nouvelle grille rempli avec des valeurs aléatoires.
@@ -66,7 +60,7 @@ void releaseGrid(Grid *grd);
  * \param size taille de la grille carrée a créer.
  * \return Instance nouvellement allouée d'un objet de type Grid ou NULL.
  */
-Grid* initGridRandom(int size, int couleur);
+Grid* initGridRandom(int size);
 
 
 /**
@@ -115,7 +109,6 @@ char *** identifyComponent4(Grid grd);
  */
 void colorFill(Grid *grd,unsigned int x,unsigned int y,char colorTarget,char colorRep);
 
-
 /**
  * \fn void colorFlood(Grid *grd,unsigned int x,unsigned int y)
  *
@@ -127,7 +120,15 @@ void colorFill(Grid *grd,unsigned int x,unsigned int y,char colorTarget,char col
  */
 void colorFlood(Grid *grd,unsigned int x,unsigned int y);
 
-void colorFlood2(Grid *grd,unsigned char color);
+/**
+ * \fn void colorFlood2(Grid *grd,unsigned char color)
+ *  
+ * \brief Fonction de remplissage de la composante 4 connexe en utilisant la couleur de la case selectionnée 
+ * 
+ * \param grd la grille à modifier.
+ * \param color la couleur à appliquer.
+ **/
+void colorFlood2(Grid *grd, unsigned char color);
 
 /**
  * \fn bool checkFullGrid(Grid* grd)
