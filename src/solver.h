@@ -4,7 +4,7 @@ struct Element
 
 {
 
-    int nombre;
+    char nombre;
 
     Element *suivant;
 
@@ -21,7 +21,9 @@ struct Pile
 };
 void affiche(Pile *pile);
 
-void empiler(Pile *pile, int nvNombre);
+
+
+void empiler(Pile *pile, char nvNombre);
 
 
 int depiler(Pile *pile);
