@@ -45,12 +45,23 @@ typedef struct{
  */
 Grid* createGrid(int size);
 
+
+/**
+ * \fn Grid createGrid2(Grid* g)
+ * \brief Fonction de création d'une nouvelle grille par copie d'une ancienne grille.
+ *
+ * \param g grille qu'on veut copier.
+ * \return nouvelle grille copié de la grille g de depart
+ */
+Grid* createGrid2(Grid* g);
+
 /**
  * \fn releaseGrid(Grid *grd)
  * \brief Fonction de destruction d'une grille.
  *
  * \param grd la grille à detruire.
  */
+
 void releaseGrid(Grid *grd);
 
 /**
@@ -131,6 +142,20 @@ void colorFlood(Grid *grd,unsigned int x,unsigned int y);
 void colorFlood2(Grid *grd, unsigned char color);
 
 /**
+ * \fn Grid* colorFlood3(Grid *grd,unsigned char color)
+ *  
+ * \brief Fonction de remplissage de la composante 4 connexe en utilisant la couleur de la case selectionnée 
+ * 
+ * \param grd la grille à modifier.
+ * \param color la couleur à appliquer.
+ * \return la nouvelle grille après le remplissage 
+ **/
+Grid* colorFlood3(Grid *grd,unsigned char color);
+
+
+
+
+/**
  * \fn bool checkFullGrid(Grid* grd)
  * \brief Fonction de test de la présence de la même valeur dans toutes les cases.
  *
@@ -138,3 +163,14 @@ void colorFlood2(Grid *grd, unsigned char color);
  * \return true si grille remplie avec la même valeur, false sinon.
  */
 bool checkFullGrid(Grid* grd);
+
+
+
+
+
+
+
+
+
+
+

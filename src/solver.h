@@ -19,3 +19,9 @@ struct Pile
     Element *premier;
 
 };
+void affiche(Pile *pile);
+
+void empiler(Pile *pile, int nvNombre);
+
+
+int depiler(Pile *pile);

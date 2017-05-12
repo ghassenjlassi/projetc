@@ -31,6 +31,29 @@ Grid* createGrid(int size){
 	return grid_final;
 }
 
+Grid* createGrid2(Grid* g){
+	int i,j;
+	Grid *grid_final;
+	grid_final=malloc(1*sizeof(Grid));
+	grid_final->size = g->size;
+	int size = g->size;
+	grid_final->block = malloc(size*sizeof(char *));
+	for (i=0 ; i<size ; i++)
+	{	
+		grid_final->block[i] = malloc (size*sizeof(char));
+	}
+		for (i = 0; i<size ; i++)
+	{
+				for (j = 0 ; j<size ; j++)
+				{	
+					grid_final->block[i][j] = g->block[i][j];
+
+				}
+	}
+
+	return grid_final;
+}
+
 void releaseGrid(Grid *grd){
 	unsigned int i;
 	for (i=0 ; i < grd->size ; i++)
@@ -143,6 +166,14 @@ void colorFlood(Grid *grd,unsigned int x,unsigned int y){
 
 void colorFlood2(Grid *grd,unsigned char color){
 	colorFill(grd,0,0,grd->block[0][0],color);
+}
+
+
+Grid* colorFlood3(Grid *grd,unsigned char color){
+	Grid* g2;
+	g2 = createGrid2(grd);
+	colorFill(g2,0,0,g2->block[0][0],color);
+	return g2;
 }
 
 bool checkFullGrid(Grid* grd){
