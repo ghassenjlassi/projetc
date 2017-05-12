@@ -9,7 +9,9 @@
  *
  */
 
-#include "grid.c"
+//#include "grid.c"
+#include "grid.h"
+#include "gameConsole.h"
 #include <stdio.h>
 
 
@@ -18,7 +20,6 @@
  * \brief Affiche la grille en texte
  * \param *grd la grille à afficher.
  */
-void showGrid(Grid* grd);
 
 /**
  * \fn void showMenu()

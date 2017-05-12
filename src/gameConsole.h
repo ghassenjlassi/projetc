@@ -1,3 +1,6 @@
+
+#ifndef __GC_H__
+#define __GC_H__
 /**
  * \file gameConsole.h
  * \brief Jeu ColorFlood 
@@ -9,16 +12,13 @@
  *
  */
 
-#include "grid.c"
-#include <stdio.h>
-#include <stdlib.h>
+//#include "grid.c"
 
 
 /**
  * \fn void main()
  * \brief programme
  */
-int main();
 
 /**
  * \fn void showGrid(Grid* grd)
@@ -33,4 +33,4 @@ void showGrid(Grid* grd);
  * Propose à l'utilisateur plusieurs choix d'actions à réaliser
  */
 void showMenu();
-
+#endif

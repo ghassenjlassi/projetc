@@ -8,10 +8,23 @@
  * Le programme principal en mode console ;)
  *
  */
-#include "gameConsole.h"
-#include "getKey.c"
+#include <stdio.h>
+
+//#include "gameConsole.h"
+#include "grid.h"
+#include "getKey.h"
 
 Grid *Grd=NULL;
+
+void showGrid(Grid* grd){
+	unsigned int i,j;
+	for(i=0;i<grd->size;i++){
+		for(j=0;j<grd->size;j++){
+			printf("%c ",grd->block[i][j]);
+		}
+		printf("\n");
+	}
+}
 
 int  main(){
 	char reponse = '1';
@@ -107,15 +120,7 @@ int  main(){
 	releaseGrid(Grd);
 }
 
-void showGrid(Grid* grd){
-	unsigned int i,j;
-	for(i=0;i<grd->size;i++){
-		for(j=0;j<grd->size;j++){
-			printf("%c ",grd->block[i][j]);
-		}
-		printf("\n");
-	}
-}
+
 
 void showMenu(){
 	printf("1) Initialiser la grille vide\n");
