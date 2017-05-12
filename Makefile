@@ -1,20 +1,18 @@
-all : game
+ColorFlood: gameConsole.o grid.o getKey.o
+	gcc -o ColorFlood gameConsole.o grid.o getKey.o -lm -Wall -Wextra
 
-game :
-	gcc -o game src/gameConsole.c -lm -Wall -Wextra
+grid.o:	src/grid.c src/grid.h
+	gcc -c src/grid.c -Wall -Wextra
 
-gameGUI : 
-	gcc -o gameGUI src/gameGUI.c -lm -lSDL -Wall -Wextra 
+gameConsole.o: src/gameConsole.c src/gameConsole.h src/grid.h src/getKey.h
+	gcc -c src/gameConsole.c -Wall -Wextra
 
-test : 
-	gcc -o test src/main.c -lm -Wall -Wextra
-
-cunit :
-	gcc -o testUnit src/UnitTests.c -lcunit -lm -Wall -Wextra
-
-doc:
-	doxygen doxygen.config
+getKey.o: src/getKey.c src/getKey.h
+	gcc -c src/getKey.c -Wall -Wextra
 
 clean:
-	rm -f  game gameGUI test testUnit
-	rm -rf ./doc
+	rm -rf *.o
+
+mrproper: clean
+	rm ColorFlood
+	
