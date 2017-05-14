@@ -22,34 +22,32 @@ void solveur(Grid *g, int n, Pile *solution, int profondeur) { //n:
 		colorFlood2(g2, tab[i]);
 		//showGrid(g2);
 		//printf("\n");
-		if (checkFullGrid(g2))
-		{
+		if (checkFullGrid(g2)){
 			affiche(solution);
-		}
-		else
-		{
+		}else{
 			solveur(g2, n, solution, profondeur+1);
 		}
 		depiler(solution);
+		releaseGrid(g2);
 	}
-	releaseGrid(g2);
+//	releaseGrid(g2);
 }
 
 void affiche(Pile *pile)
 {
 	if (pile == NULL)
 	{
-		exit(EXIT_FAILURE);
+		return;
+//		exit(EXIT_FAILURE);
 	}
 	printf("Solution trouve : ");
 	Element *actuel = pile->premier;
 	while (actuel != NULL)
 	{
-
 		printf("%c ", actuel->couleur);
 		actuel = actuel->suivant;
 	}
-
+	free (actuel);
 	printf("\nfin de la solution\n");
 }
 
@@ -59,7 +57,8 @@ void empiler(Pile *pile, char nvCouleur)
 
 	if (pile == NULL || nouveau == NULL)
 	{
-		exit(EXIT_FAILURE);
+		return;
+//		exit(EXIT_FAILURE);
 	}
 
 	nouveau->couleur = nvCouleur;
@@ -77,8 +76,7 @@ char depiler(Pile *pile)
 	char couleurDepile = 0;
 	Element *elementDepile = pile->premier;
 
-	if (pile != NULL && pile->premier != NULL)
-	{
+	if (pile != NULL && pile->premier != NULL){
 		couleurDepile = elementDepile->couleur;
 		pile->premier = elementDepile->suivant;
 		free(elementDepile);
@@ -124,5 +122,7 @@ int main(){
 
 	printf("\n### Fin du solveur ###\n");
 	releaseGrid(g);
+		
+	free(p);
 	return 0;
 }
