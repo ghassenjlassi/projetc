@@ -1,5 +1,13 @@
+all: ColorFlood Solveur
+
 ColorFlood: gameConsole.o grid.o getKey.o
 	gcc -o ColorFlood gameConsole.o grid.o getKey.o -lm -Wall -Wextra
+
+Solveur: solver.o grid.o 
+	gcc -o Solveur solver.o grid.o -lm -Wall -Wextra
+
+solver.o: src/solver.c src/solver.h src/grid.h 
+	gcc -c src/solver.c -Wall -Wextra
 
 grid.o:	src/grid.c src/grid.h
 	gcc -c src/grid.c -Wall -Wextra
@@ -14,5 +22,4 @@ clean:
 	rm -rf *.o
 
 mrproper: clean
-	rm ColorFlood
-	
+	rm -rf ColorFlood Solveur	

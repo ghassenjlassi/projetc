@@ -8,83 +8,83 @@
 
 
 void solveur(Grid *g, int n, Pile *solution, int profondeur) { //n:
-		int i;
-		Grid *g2;
+	int i;
+	Grid *g2;
+	char tab[6] = {'R','V','B','J','O','M'};
 
-
-			// déclarations des variables locales i, g2, ...
-			for (i=0; i<6; i=i+1) { 
-			// pour toutes les couleurs possibles
-			empiler(solution,i);
-	
-			char tab[6] = {'R','V','B','J','O','M'};
-			 
-			g2 = colorFlood3(g, tab[i]);
-	
-			if (checkFullGrid(g2)){
-				affiche(solution);
-
-			}
-			
-			else solveur(g2, n, solution, profondeur+1);
-			depiler(solution);
-}
+	if(profondeur==n)
+		return;
+	// déclarations des variables locales i, g2, ...
+	for (i=0; i<6; i=i+1) {
+		// pour toutes les couleurs possibles
+		empiler(solution,tab[i]);
+		g2 = createGrid2(g);
+		colorFlood2(g2, tab[i]);
+		//showGrid(g2);
+		//printf("\n");
+		if (checkFullGrid(g2))
+		{
+			affiche(solution);
+		}
+		else
+		{
+			solveur(g2, n, solution, profondeur+1);
+		}
+		depiler(solution);
+	}
+	releaseGrid(g2);
 }
 
 void affiche(Pile *pile)
 {
-    if (pile == NULL)
-    {
+	if (pile == NULL)
+	{
+		exit(EXIT_FAILURE);
+	}
+	printf("Solution trouve : ");
+	Element *actuel = pile->premier;
+	while (actuel != NULL)
+	{
 
-        exit(EXIT_FAILURE);
-    }
-    Element *actuel = pile->premier;
+		printf("%c ", actuel->couleur);
+		actuel = actuel->suivant;
+	}
 
-    while (actuel != NULL)
-    {	
-
-        printf("%d\n", actuel->nombre);
-        actuel = actuel->suivant;
-    }
-
-    printf("\nfin");
+	printf("\nfin de la solution\n");
 }
 
-void empiler(Pile *pile, char nvNombre)
+void empiler(Pile *pile, char nvCouleur)
 {
-    Element *nouveau = malloc(sizeof(*nouveau));
+	Element *nouveau = malloc(sizeof(*nouveau));
 
-    if (pile == NULL || nouveau == NULL)
-    {
-      
-       exit(EXIT_FAILURE);
-    }
+	if (pile == NULL || nouveau == NULL)
+	{
+		exit(EXIT_FAILURE);
+	}
 
-    nouveau->nombre = nvNombre;
-    nouveau->suivant = pile->premier;
-    pile->premier = nouveau;
-  
+	nouveau->couleur = nvCouleur;
+	nouveau->suivant = pile->premier;
+	pile->premier = nouveau;
 }
 
-
-int depiler(Pile *pile)
+char depiler(Pile *pile)
 {
-    if (pile == NULL)
-    {
-        exit(EXIT_FAILURE);
-    }
+	if (pile == NULL)
+	{
+		exit(EXIT_FAILURE);
+	}
 
-    int nombreDepile = 0;
-    Element *elementDepile = pile->premier;
+	char couleurDepile = 0;
+	Element *elementDepile = pile->premier;
 
-    if (pile != NULL && pile->premier != NULL)
-    {
-        nombreDepile = elementDepile->nombre;
-        pile->premier = elementDepile->suivant;
-        free(elementDepile);
-    }
+	if (pile != NULL && pile->premier != NULL)
+	{
+		couleurDepile = elementDepile->couleur;
+		pile->premier = elementDepile->suivant;
+		free(elementDepile);
+	}
 
-    return nombreDepile;
+	return couleurDepile;
 }
 
 void showGrid(Grid* grd){
@@ -98,17 +98,31 @@ void showGrid(Grid* grd){
 }
 
 int main(){
+	printf("Solveur O'Calm Force Brute\n");
+	//INIT de la grille
+	printf("Saisir la grille a evaluer : ");
+	char file[255];
+	scanf("%s",file);
 	Grid * g;
-	g = initGridFromFile("../grilles/grilleTest.txt");
-	Grid *g2=createGrid2(g);
-	showGrid(g2);
+	g = initGridFromFile(file);
+
+	//DEFINIR la profondeur max
+	printf("\n Saisir la profondeur max :");
+        int max;
+	scanf("%d",&max);
+
+	//RECHERCHE des solutions
+	printf("\nGRILLE:\n");
+	showGrid(g);
+	printf("\n### Debut du solveur ###\n\n");
 
 	Pile * p;
 	p = malloc(sizeof(Pile));
-
 	p->premier =NULL;
 
-	solveur(g,10,p,0);
+	solveur(g,max,p,0);
 
-	return 1;
+	printf("\n### Fin du solveur ###\n");
+	releaseGrid(g);
+	return 0;
 }
