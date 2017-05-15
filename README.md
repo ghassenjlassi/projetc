@@ -25,6 +25,12 @@ Lancez ColorCalm.
 $ make	
 $ ./ColorFlood
 ```
+Lancez Solveur.
+```sh
+$ make	
+$ ./Solveur
+```
+
 Lancez les tests unitaires(avec CUnit).
 ```sh
 $ make cunit
