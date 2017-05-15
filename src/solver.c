@@ -1,3 +1,14 @@
+/**
+ * \file solver.c
+ * \brief Fonction du solveur
+ * \author O'Calm
+ * \version 0.1
+ * \date 14 mai 2017
+ *
+ * Code source du solveur
+ *
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -6,7 +17,15 @@
 #include "grid.h"
 #include "solver.h"
 
-
+/**
+ * \fn void solveur(Grid *g, int n, Pile *solution, int profondeur) 
+ * \brief fonction solveur par force brute
+ *
+ * \param g la grille 
+ * \param n la profondeur maximal
+ * \param solution la pile sur laquelle on empile les couleurs pour la solution
+ * \param profondeur la profondeur actuelle de la solution
+ */
 void solveur(Grid *g, int n, Pile *solution, int profondeur) { //n:
 	int i;
 	Grid *g2;

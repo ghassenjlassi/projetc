@@ -23,20 +23,7 @@ $ sudo apt install valgrind
 Lancez ColorCalm.
 ```sh
 $ make	
-$ ./game
-```
-
-Lancez ColorCalm GUI (avec SDL).
-Encore en développement. Ne permet que d'afficher la grille.
-! Warning et fuites mémoires non corrigés !
-```sh
-$ make gameGUI
-$ ./gameGUI
-```
-Lancez le programme de test des fonction.
-```sh
-$ make test
-$ ./test
+$ ./ColorFlood
 ```
 Lancez les tests unitaires(avec CUnit).
 ```sh
@@ -52,11 +39,11 @@ la doc est dispo au format HTML dans ./Doc/html/index.html
 
 ## Désinstallation/Nettoyage
 ```sh
-$ make clean
+$ make mrproper
 ``` 
 ## Test des fuites mémoires
 ```sh
 $ make cunit
 $ valgrind --leak-check=full --show-leak-kinds=all ./testUnit
-$ valgrind --leak-check=full --show-leak-kinds=all ./game
+$ valgrind --leak-check=full --show-leak-kinds=all ./ColorFlood
 ```
